@@ -68,12 +68,18 @@ const updateUI=async()=>{
         spinner.style.display='block'
     }
     const input = filterInput(searchInput.value);
+    if(input===''){
+        spinner.style.animation='stop-spin 1s ease-in-out infinite';
+        spinner.style.display='none';
+        return;
+    }
     // console.log(input);
     try{
         const response = await fetch(fetchApi+input);
         const result = await response.json() 
         isLoading=false;
         if(!isLoading){
+            spinner.style.animation='stop-spin 1s ease-in-out infinite';
             spinner.style.display='none';
         }
         const {height,id,name,sprites,stats,types,weight}=result;
@@ -82,7 +88,9 @@ const updateUI=async()=>{
         updateImageAndTypes(types,sprites,name);
         updateStats(stats);
     }catch(e){
-        alert('error occured',e)
+        spinner.style.animation='stop-spin 1s ease-in-out infinite';
+        spinner.style.display='none';
+        alert('error occured or undetermined id')
     }
 }
 

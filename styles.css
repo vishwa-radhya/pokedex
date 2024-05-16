@@ -19,11 +19,12 @@ h2{
 #container{
     border: 2px solid rgb(6, 6, 7);
     width: min(370px,95vw);
-    height: 590px;
+    height: 610px;
     margin-top: 20px;
     border-radius: 10px;
     box-shadow: 7px 7px 1px black;
     background-color: rgb(236, 185, 185);
+    overflow: hidden;
 }
 label{
     text-align: center;
