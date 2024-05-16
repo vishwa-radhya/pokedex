@@ -1,0 +1,239 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+}
+body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #a0d2eb;
+}
+h2{
+    text-align: center;
+    margin-top: 15px;
+    font-family: "Orbitron", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+    color: rgb(2, 2, 2);
+}
+#container{
+    border: 2px solid rgb(6, 6, 7);
+    width: min(370px,95vw);
+    height: 590px;
+    margin-top: 20px;
+    border-radius: 10px;
+    box-shadow: 7px 7px 1px black;
+    background-color: rgb(236, 185, 185);
+}
+label{
+    text-align: center;
+    width: auto;
+    display: block;
+    padding: 8px;
+    font-weight: 500;
+    font-family: "Orbitron", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+#input-and-btn-cont{
+    width: auto;
+    display: flex;
+    justify-content: center;
+    padding: 3px;
+    
+}
+#search-input{
+    font-size: medium;
+    border-radius:13px ;
+    text-align: center;
+}
+#search-button{
+    font-family: "Orbitron", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+    background-color: black;
+    color: ghostwhite;
+    border-radius: 13px;
+    margin-left: 9px;
+}
+#search-button:active{
+    background-color: ghostwhite;
+    color: rgb(0, 0, 0);
+}
+#name-and-id-cont{
+    width: auto;
+    display: flex;
+    justify-content: flex-start;
+    padding: 3px;
+    font-family: "Orbitron", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+#pokemon-name{
+    margin-left: 10px;
+}
+#pokemon-id{
+    margin-left: 29px;
+}
+#weight-and-height-cont{
+    width: auto;
+    display: flex;
+    justify-content: flex-start;
+    padding: 4px;
+    border: 0;
+    font-family: "Orbitron", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  font-weight: 400;
+}
+#weight{
+    margin-left: 9px;
+}
+#sprite{
+    width: 170px;
+}
+.cent{
+    text-align: center;
+    width: 70px;
+}
+#height{
+    margin-left: 20px;
+}
+#img-cont{
+    width: auto;
+    display: flex;
+    height: 150px;
+    align-items: center;
+    justify-content: center;
+}
+
+#types{
+    width: 40%;
+    height: 25px;
+    margin: 5px 0px 7px 20px;
+    display: flex;
+    justify-content: space-around;
+    font-family: "Orbitron", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+#stats-cont{
+    width: 100%;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    gap: 5px;
+    height: calc(600px - 320px);
+    padding: 5px 8px;
+    font-family: "Orbitron", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+.gt{
+    grid-column-start: 1;
+    grid-column-end: 3;
+    
+}
+.stat{
+    background-color: rgb(211, 229, 110);
+    text-align: center;
+    line-height: 30px;
+    border: 1px solid;
+    box-shadow: 2px 2px black;
+    font-weight: 600;
+}
+.electric{
+    background-color: rgb(226, 255, 4);
+    color: black;
+}
+.normal{
+    background-color: rgb(135, 129, 129);
+    color: black;
+}
+.grass{
+    background-color: rgb(50, 141, 49);
+    color: ghostwhite;
+}
+.poison{
+    background-color: rgb(238, 170, 181);
+    color: black;
+}
+.fire{
+    background-color: orange;
+    color: ghostwhite;
+}
+.flying{
+    background: linear-gradient(180deg,rgb(19, 70, 142),grey);
+    color: ghostwhite;
+}
+.water{
+    background-color: rgb(35, 35, 207);
+    color: ghostwhite;
+}
+.bug{
+    background-color: rgb(10, 71, 9);
+    color: ghostwhite;
+}
+.ground{
+    background: linear-gradient(180deg,yellow,rgb(98, 29, 29));
+    color: ghostwhite;
+}
+.fairy{
+    background-color: rgb(236, 186, 194);
+    color: black;
+}
+.fighting{
+    background-color: rgb(230, 40, 40);
+    color: ghostwhite;
+}
+.psychic{
+    background-color: rgba(255, 192, 203, 0.641);
+    color: black;
+}
+.rock{
+    background-color: rgba(165, 42, 42, 0.599);
+    color: ghostwhite;
+}
+.steel{
+    background-color: silver;
+    color: black;
+}
+.ice{
+    background-color: rgb(107, 215, 240);
+    color: black;
+}
+.ghost{
+    background-color: purple;
+    color: ghostwhite;
+}
+.dragon{
+    color: ghostwhite;
+    background: linear-gradient(180deg,rgb(77, 77, 231),rgb(216, 70, 70));
+}
+.dark{
+    background-color: rgb(17, 15, 15);
+    color: ghostwhite;
+}
+#loader{
+    display: inline-block;
+    position: relative;
+    top: -400px;
+    width: 50px;
+    height: 50px;
+    border: 3px solid rgba(146, 139, 139, 0.6);
+    border-radius: 50%;
+    border-top-color: #3a3e3e;
+    animation: stop-spin 1s ease-in-out infinite;
+    /* -webkit-animation: stop-spin 1s ease-in-out infinite; */
+    display:none;
+}
+@keyframes spin {
+  to {
+    -webkit-transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes spin {
+  to {
+    -webkit-transform: rotate(360deg);
+  }
+}
+@keyframes stop-spin{}

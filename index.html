@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>pokedex</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Concert+One&family=Orbitron:wght@400..900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <h2>Pokemon Search App</h2>
+    <div id="container">
+        <label for="search-input">
+            Search for Pokemon Name or ID:
+        </label>
+        <div id="input-and-btn-cont">
+            <input type="text" id="search-input" value="">
+            <button id="search-button">
+                Search
+            </button>
+        </div>
+        <div id="name-and-id-cont">
+            <h3 id="pokemon-name">name</h3>
+            <h3 id="pokemon-id">id</h3>
+        </div>
+        <div id="weight-and-height-cont">
+            <p id="weight">weight</p>
+            <p id="height">height</p>
+        </div>
+        <div id="img-cont">
+            <img src="" alt="" id="sprite">
+        </div>
+        <div id="types">
+        </div>
+        <div id="stats-cont">
+            <div class="stat gt">Base</div>
+            <div class="stat">Stats</div>
+            <div class="stat gt">HP:</div>
+            <div class="stat" id="hp"></div>
+            <div class="stat gt">Attack:</div>
+            <div class="stat" id="attack"></div>
+            <div class="stat gt">Defence:</div>
+            <div class="stat" id="defence"></div>
+            <div class="stat gt">Sp. Attack:</div>
+            <div class="stat" id="special-attack"></div>
+            <div class="stat gt">Sp. Defence:</div>
+            <div class="stat" id="special-defence"></div>
+            <div class="stat gt">Speed:</div>
+            <div class="stat" id="speed"></div>
+        </div>
+    </div>
+    <div id="loader">
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
