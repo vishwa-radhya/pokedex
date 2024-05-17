@@ -332,6 +332,7 @@ label{
   }
 }
 @keyframes stop-spin{}
+
 @media screen and (max-width:475px){
     #info{
         font-size: 10.1px;
@@ -347,14 +348,15 @@ label{
         top: 62.5px;
         background-color: rgb(229, 237, 239);
         overflow: auto;
+        /* display: block; */
+        flex-direction: column;
+      overflow: auto;
      }
      .dd-btns{
         border: 1px solid rgb(26, 33, 32);
         height: 24px;
-        display: block;
-        width: 199px;
         border-right: none;
-        background-color: #b1b1b1;
+        background-color: #bfbfbf;
         color: ghostwhite;
         font-family: "Orbitron", sans-serif;
       font-optical-sizing: auto;
@@ -362,18 +364,29 @@ label{
       border-radius: 2px;
       font-weight: 600;
       letter-spacing: 0.5px;
-      overflow: hidden;
+      flex-wrap: nowrap;
+
+      text-align: center;
      }
      ::-webkit-scrollbar{
         width: 6px;
         z-index: 3;
         background-color: rgb(145, 142, 142);
      }
+     ::-webkit-scrollbar:vertical{
+        display: block;
+     }
      ::-webkit-scrollbar:horizontal{
         display: none;
      }
      ::-webkit-scrollbar-thumb{
         background-color: rgb(16, 17, 17);
+     }
+     #drop-down-cont .show{
+        display:block;
+     }
+     .dd-hide{
+        display: none;
      }
  }
  
