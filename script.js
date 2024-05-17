@@ -96,6 +96,7 @@ const updateUI=async()=>{
         spinner.style.display='block'
     }
      input = filterInput(searchInput.value);
+     console.log('Updating UI with:', searchInput.value);
      dropDownCont.classList.remove('show')
         dropDownCont.classList.add('dd-hide')
     if(input===''){
@@ -131,23 +132,27 @@ searchInput.addEventListener('keyup',(e)=>{
         updateUI();
     }
     if(searchInput.value===''){
-        dropDownCont.classList.remove('show')
-        dropDownCont.classList.add('dd-hide')
+        dropDownCont.classList.remove('show');
+        dropDownCont.classList.add('dd-hide');
+        console.log('Dropdown hidden');
     }else{
         dropDownCont.classList.remove('dd-hide');
-        dropDownCont.classList.add('show')
+        dropDownCont.classList.add('show');
+        console.log('Dropdown shown'); 
     }
-    dropDownCont.innerHTML=''
-    showSuggestions(searchInput.value)
+    dropDownCont.innerHTML='';
+    showSuggestions(searchInput.value);
 })
 const showSuggestions=(input)=>{
     let filterData = data.filter(pokemon=>pokemon.name.startsWith(input));
+    console.log('Filtered data:', filterData);
     for(let obj of filterData){
         const {name}=obj;
         const btn =document.createElement('button');
         btn.classList.add('dd-btns');
         btn.textContent=name;
-        btn.addEventListener('click',()=>{searchInput.value=name})
+        btn.addEventListener('click',()=>{searchInput.value=name});
         dropDownCont.appendChild(btn);
     }
 }
+// console.log('Data:', data);

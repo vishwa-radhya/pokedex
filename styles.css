@@ -87,7 +87,7 @@ label{
     padding: 3px;
     
 }
-#drop-down-cont{
+#drop-down-cont {
     border: 1px solid black;
     position: absolute;
     width: 200px;
@@ -97,23 +97,22 @@ label{
     top: 62.5px;
     background-color: rgb(229, 237, 239);
     overflow: auto;
- }
- .dd-btns{
+}
+.dd-btns {
     border: 1px solid rgb(26, 33, 32);
     height: 24px;
     display: block;
-    width: 199px;
-    border-right: none;
+    width: 100%; /* Ensure full width */
     background-color: #b1b1b1;
     color: ghostwhite;
     font-family: "Orbitron", sans-serif;
-  font-optical-sizing: auto;
-  font-style: normal;
-  border-radius: 2px;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-  overflow: hidden;
- }
+    font-optical-sizing: auto;
+    font-style: normal;
+    border-radius: 2px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    overflow: hidden;
+}
  ::-webkit-scrollbar{
     width: 6px;
     z-index: 3;
@@ -338,42 +337,22 @@ label{
         font-size: 10.1px;
         text-wrap: balance;
     }
-    #drop-down-cont{
+    #drop-down-cont {
         background-color: #3c6cd3;
-        /* display:  */
         overflow: auto;
-        /* width: auto; */
-        /* position: relative; */
         z-index: 1;
-     }
-     .dd-btns{
+        width: 90%; /* Adjust width for mobile */
+        left: 5%; /* Center horizontally */
+        top: auto; /* Adjust as necessary */
+    }
+    .dd-btns {
         background-color: brown;
         color: ghostwhite;
         display: block;
         position: relative;
         font-size: 12px;
-        width: inherit;
+        width: 100%;
         z-index: 2;
-     }
-     ::-webkit-scrollbar{
-        width: 6px;
-        z-index: 3;
-        background-color: rgb(145, 142, 142);
-     }
-     ::-webkit-scrollbar:vertical{
-        display: block;
-     }
-     ::-webkit-scrollbar:horizontal{
-        display: none;
-     }
-     ::-webkit-scrollbar-thumb{
-        background-color: rgb(16, 17, 17);
-     }
-     .show{
-        display:block;
-     }
-     .dd-hide{
-        display: none;
-     }
+    }
  }
  
