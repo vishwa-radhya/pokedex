@@ -67,6 +67,7 @@ h2{
     box-shadow: 7px 7px 1px black;
     background-color: rgb(236, 185, 185);
     overflow: hidden;
+    position: relative;
 }
 label{
     text-align: center;
@@ -85,6 +86,50 @@ label{
     padding: 3px;
     
 }
+#drop-down-cont{
+    border: 1px solid black;
+    position: absolute;
+    width: 200px;
+    height: 120px;
+    left: 43.8px;
+    border-radius: 5px;
+    top: 62.5px;
+    background-color: rgb(229, 237, 239);
+    overflow: auto;
+ }
+ .dd-btns{
+    border: 1px solid rgb(26, 33, 32);
+    height: 24px;
+    display: block;
+    width: 199px;
+    border-right: none;
+    background-color: #b1b1b1;
+    color: ghostwhite;
+    font-family: "Orbitron", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  border-radius: 2px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  overflow: hidden;
+ }
+ ::-webkit-scrollbar{
+    width: 6px;
+    z-index: 3;
+    background-color: rgb(145, 142, 142);
+ }
+ ::-webkit-scrollbar:horizontal{
+    display: none;
+ }
+ ::-webkit-scrollbar-thumb{
+    background-color: rgb(16, 17, 17);
+ }
+ #drop-down-cont .show{
+    display:block;
+ }
+ .dd-hide{
+    display: none;
+ }
 #search-input{
     font-size: medium;
     border-radius:13px ;
@@ -274,7 +319,6 @@ label{
     border-radius: 50%;
     border-top-color: #3a3e3e;
     animation: stop-spin 1s ease-in-out infinite;
-    /* -webkit-animation: stop-spin 1s ease-in-out infinite; */
     display:none;
 }
 @keyframes spin {
@@ -294,3 +338,4 @@ label{
         text-wrap: balance;
     }
  }
+ 
