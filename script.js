@@ -15,9 +15,26 @@ const speed =document.getElementById('speed')
 const spinner =document.getElementById('loader')
 const bulb=document.getElementById('bulb')
 const info=document.getElementById('info')
+const dropDownCont =document.getElementById('drop-down-cont')
 let isLoading = false;
 let isGlowing=false;
+let input;
 const fetchApi ='https://pokeapi-proxy.freecodecamp.rocks/api/pokemon/'
+let data=[]
+
+const fetchData=async()=>{
+    try{
+        const response =await fetch(fetchApi);
+        const result =await response.json();
+        data=result.results
+    }catch(e){
+        console.log('error coocured while calling fetchData',err);
+    }
+}
+window.onload=()=>{
+    fetchData()
+}
+
 
 bulb.addEventListener('click',()=>{
     isGlowing=!isGlowing;
@@ -78,13 +95,14 @@ const updateUI=async()=>{
         spinner.style.animation='spin 1s ease-in-out infinite';
         spinner.style.display='block'
     }
-    const input = filterInput(searchInput.value);
+     input = filterInput(searchInput.value);
+     dropDownCont.classList.remove('show')
+        dropDownCont.classList.add('dd-hide')
     if(input===''){
         spinner.style.animation='stop-spin 1s ease-in-out infinite';
         spinner.style.display='none';
         return;
     }
-    // console.log(input);
     try{
         const response = await fetch(fetchApi+input);
         const result = await response.json() 
@@ -108,8 +126,28 @@ const updateUI=async()=>{
 searchButton.addEventListener('click',()=>{
     updateUI();
 })
-searchInput.addEventListener('keydown',(e)=>{
+searchInput.addEventListener('keyup',(e)=>{
     if(e.key==='Enter'){
         updateUI();
     }
+    if(searchInput.value===''){
+        dropDownCont.classList.remove('show')
+        dropDownCont.classList.add('dd-hide')
+    }else{
+        dropDownCont.classList.remove('dd-hide');
+        dropDownCont.classList.add('show')
+    }
+    dropDownCont.innerHTML=''
+    showSuggestions(searchInput.value)
 })
+const showSuggestions=(input)=>{
+    let filterData = data.filter(pokemon=>pokemon.name.startsWith(input));
+    for(let obj of filterData){
+        const {name}=obj;
+        const btn =document.createElement('button');
+        btn.classList.add('dd-btns');
+        btn.textContent=name;
+        btn.addEventListener('click',()=>{searchInput.value=name})
+        dropDownCont.appendChild(btn);
+    }
+}
