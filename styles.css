@@ -8,6 +8,47 @@ body{
     align-items: center;
     background-color: #a0d2eb;
 }
+#info{
+    border: 2px solid black;
+    position: absolute;
+    width: min(280px,60vw);
+    height: 170px;
+    top: 203px;
+    background-color: #3c6cd3;
+    color: ghostwhite;
+    border-radius: 15px;
+    font-family: "Orbitron", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  text-wrap: wrap;
+  font-size: 12.2px;
+  text-align:left;
+  overflow: hidden;
+  box-shadow: -7px -7px 2px rgb(251, 244, 244);
+  z-index: 10;
+  font-weight: 500;
+  display: none;
+}
+#bulb{
+    position: relative;
+    left: 10px;
+    top: 9px;
+}
+#bulb:active{
+    scale: 1.2;
+}
+#info ul{
+    position: relative;
+    left: -13px;
+    top: 10px;   
+}
+#info li{
+    list-style:circle;
+    margin-bottom: 4px;
+    letter-spacing: 0.05px;
+  text-wrap: wrap;
+
+}
 h2{
     text-align: center;
     margin-top: 15px;
@@ -15,6 +56,7 @@ h2{
   font-optical-sizing: auto;
   font-style: normal;
     color: rgb(2, 2, 2);
+    text-shadow: 2px 4px rgb(102, 102, 225);
 }
 #container{
     border: 2px solid rgb(6, 6, 7);
@@ -96,6 +138,8 @@ label{
 .cent{
     text-align: center;
     width: 70px;
+    border: 1px solid black;
+    
 }
 #height{
     margin-left: 20px;
@@ -145,10 +189,12 @@ label{
 .electric{
     background-color: rgb(226, 255, 4);
     color: black;
+    width: 100px;
 }
 .normal{
     background-color: rgb(135, 129, 129);
     color: black;
+    width: 82px;
 }
 .grass{
     background-color: rgb(50, 141, 49);
@@ -177,6 +223,7 @@ label{
 .ground{
     background: linear-gradient(180deg,yellow,rgb(98, 29, 29));
     color: ghostwhite;
+    width: 90px;
 }
 .fairy{
     background-color: rgb(236, 186, 194);
@@ -185,10 +232,12 @@ label{
 .fighting{
     background-color: rgb(230, 40, 40);
     color: ghostwhite;
+    width: 100px;
 }
 .psychic{
     background-color: rgba(255, 192, 203, 0.641);
     color: black;
+    width: 100px;
 }
 .rock{
     background-color: rgba(165, 42, 42, 0.599);
@@ -208,6 +257,7 @@ label{
 }
 .dragon{
     color: ghostwhite;
+    width: 100px;
     background: linear-gradient(180deg,rgb(77, 77, 231),rgb(216, 70, 70));
 }
 .dark{
@@ -238,3 +288,8 @@ label{
   }
 }
 @keyframes stop-spin{}
+@media screen and (max-width:475px){
+    #info{
+        font-size: 11px;
+    }
+ }

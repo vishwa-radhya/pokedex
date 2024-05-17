@@ -8,14 +8,25 @@ const imgView =document.getElementById('sprite')
 const pokemonType =document.getElementById('types')
 const hp =document.getElementById('hp')
 const attack =document.getElementById('attack')
-const defence =document.getElementById('defence')
+const defense =document.getElementById('defense')
 const specialAttack =document.getElementById('special-attack')
-const specialDefence =document.getElementById('special-defence')
+const specialDefense =document.getElementById('special-defense')
 const speed =document.getElementById('speed')
 const spinner =document.getElementById('loader')
+const bulb=document.getElementById('bulb')
+const info=document.getElementById('info')
 let isLoading = false;
+let isGlowing=false;
 const fetchApi ='https://pokeapi-proxy.freecodecamp.rocks/api/pokemon/'
 
+bulb.addEventListener('click',()=>{
+    isGlowing=!isGlowing;
+    if(isGlowing){
+        info.style.display='block'
+    }else{
+        info.style.display='none'
+    }
+})
 
 const updateStats=(stats)=>{
     const stat_array =[];
@@ -24,15 +35,15 @@ const updateStats=(stats)=>{
     }
     hp.textContent=stat_array[0];
     attack.textContent=stat_array[1];
-    defence.textContent=stat_array[2];
+    defense.textContent=stat_array[2];
     specialAttack.textContent=stat_array[3];
-    specialDefence.textContent=stat_array[4];
+    specialDefense.textContent=stat_array[4];
     speed.textContent=stat_array[5];
 }
 
 const updateNameAndId=(name,id)=>{
-    pokemonName.textContent=name;
-    pokemonId.textContent=`${id}#`;
+    pokemonName.textContent=name.toUpperCase();
+    pokemonId.textContent=`#${id}`;
 }
 
 const heightAndWeight=(height,weight)=>{
@@ -45,12 +56,12 @@ const updateImageAndTypes=(types,sprites,pokemon)=>{
     imgView.alt=pokemon;
     for(let num of types){
         const {name}=num.type;
-        pokemonType.innerHTML+=`<div class='${name.toLowerCase()} cent'>${name}</div>`
+        pokemonType.innerHTML+=`<div class='${name.toLowerCase()} cent'>${name.toUpperCase()}</div>`
     }
 }
 
 const filterInput=input=>{
-    return input.replace(/[^a-zA-Z0-9]/g,'');
+    return input.replace(/[^a-zA-Z0-9-]/g,'').toLowerCase();
 }
 
 const updateUI=async()=>{

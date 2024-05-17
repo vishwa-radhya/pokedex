@@ -10,13 +10,15 @@
     <link href="https://fonts.googleapis.com/css2?family=Concert+One&family=Orbitron:wght@400..900&display=swap" rel="stylesheet">
 </head>
 <body>
-    <h2>Pokemon Search App</h2>
+    <h2>Pokemon Search App
+    <img src="bulb-svgrepo-com.svg" id="bulb" alt="light-bulb" width="35px">
+    </h2>
     <div id="container">
         <label for="search-input">
             Search for Pokemon Name or ID:
         </label>
         <div id="input-and-btn-cont">
-            <input type="text" id="search-input" value="">
+            <input type="text" id="search-input" value="" required>
             <button id="search-button">
                 Search
             </button>
@@ -30,7 +32,7 @@
             <p id="height">height</p>
         </div>
         <div id="img-cont">
-            <img src="pokeball-removebg-preview.png"  alt="" id="sprite">
+            <img src="pokeball-removebg-preview.png"  alt="pokeball-image" id="sprite">
         </div>
         <div id="types">
         </div>
@@ -41,17 +43,29 @@
             <div class="stat" id="hp"></div>
             <div class="stat gt">Attack:</div>
             <div class="stat" id="attack"></div>
-            <div class="stat gt">Defence:</div>
-            <div class="stat" id="defence"></div>
+            <div class="stat gt">Defense:</div>
+            <div class="stat" id="defense"></div>
             <div class="stat gt">Sp. Attack:</div>
             <div class="stat" id="special-attack"></div>
-            <div class="stat gt">Sp. Defence:</div>
-            <div class="stat" id="special-defence"></div>
+            <div class="stat gt">Sp. Defense:</div>
+            <div class="stat" id="special-defense"></div>
             <div class="stat gt">Speed:</div>
             <div class="stat" id="speed"></div>
         </div>
     </div>
     <div id="loader">
+    </div>
+    <div id="info">
+        <ul>
+            <li>There is a total of 1302 pokemons.</li>
+            <li>The id ranges from 1-10277.</li>
+            <li>There are some pokemons with<br>both genders
+            like Nidoran.</li>
+            <li>So to get male one type nidoran-m<br>
+            for the feamle type nidoran-f.</li>
+            <li>If You encounter any problem<br>
+            please refresh the page.</li>
+        </ul>
     </div>
     <script src="script.js"></script>
 </body>
