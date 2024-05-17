@@ -21,7 +21,7 @@ body{
   font-optical-sizing: auto;
   font-style: normal;
   text-wrap: wrap;
-  font-size: 12.2px;
+  font-size: 12px;
   text-align:left;
   overflow: hidden;
   box-shadow: -7px -7px 2px rgb(251, 244, 244);
@@ -290,6 +290,7 @@ label{
 @keyframes stop-spin{}
 @media screen and (max-width:475px){
     #info{
-        font-size: 10.7px;
+        font-size: 10.1px;
+        text-wrap: balance;
     }
  }
