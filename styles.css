@@ -28,6 +28,7 @@ body{
   z-index: 10;
   font-weight: 500;
   display: none;
+  /* font-variant: normal; */
 }
 #bulb{
     position: relative;
@@ -184,7 +185,6 @@ label{
     text-align: center;
     width: 70px;
     border: 1px solid black;
-    
 }
 #height{
     margin-left: 20px;
