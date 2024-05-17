@@ -349,7 +349,7 @@ label{
      .dd-btns{
         background-color: brown;
         color: ghostwhite;
-        display: block;
+        display: inline-block;
         position: relative;
         font-size: 12px;
         width: auto;
