@@ -349,10 +349,10 @@ label{
      .dd-btns{
         background-color: brown;
         color: ghostwhite;
-        display: inline-block;
+        display: block;
         position: relative;
         font-size: 12px;
-        width: auto;
+        width: inherit;
         z-index: 2;
      }
      ::-webkit-scrollbar{
