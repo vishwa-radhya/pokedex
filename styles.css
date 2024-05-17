@@ -356,7 +356,7 @@ label{
         border: 1px solid rgb(26, 33, 32);
         height: 24px;
         border-right: none;
-        background-color: #bfbfbf;
+        background-color: #9c2525;
         color: ghostwhite;
         font-family: "Orbitron", sans-serif;
       font-optical-sizing: auto;
@@ -364,8 +364,9 @@ label{
       border-radius: 2px;
       font-weight: 600;
       letter-spacing: 0.5px;
-      flex-wrap: nowrap;
-
+      /* flex-wrap: nowrap; */
+        display: block;
+        width:inherit;
       text-align: center;
      }
      ::-webkit-scrollbar{
