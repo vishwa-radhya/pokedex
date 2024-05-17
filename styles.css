@@ -339,35 +339,21 @@ label{
         text-wrap: balance;
     }
     #drop-down-cont{
-        border: 1px solid black;
-        position: absolute;
-        width: 200px;
-        height: 120px;
-        left: 43.8px;
-        border-radius: 5px;
-        top: 62.5px;
-        background-color: rgb(24, 143, 172);
+        background-color: #3c6cd3;
+        /* display:  */
         overflow: auto;
-        /* display: block; */
-        flex-direction: column;
-      overflow: auto;
+        /* width: auto; */
+        /* position: relative; */
+        z-index: 1;
      }
      .dd-btns{
-        border: 1px solid rgb(26, 33, 32);
-        height: 24px;
-        border-right: none;
-        background-color: #9c2525;
+        background-color: brown;
         color: ghostwhite;
-        font-family: "Orbitron", sans-serif;
-      font-optical-sizing: auto;
-      font-style: normal;
-      border-radius: 2px;
-      font-weight: 600;
-      letter-spacing: 0.5px;
-      /* flex-wrap: nowrap; */
         display: block;
-        width:inherit;
-      text-align: center;
+        position: relative;
+        font-size: 12px;
+        width: auto;
+        z-index: 2;
      }
      ::-webkit-scrollbar{
         width: 6px;
@@ -383,7 +369,7 @@ label{
      ::-webkit-scrollbar-thumb{
         background-color: rgb(16, 17, 17);
      }
-     #drop-down-cont .show{
+     .show{
         display:block;
      }
      .dd-hide{
