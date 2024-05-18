@@ -27,12 +27,13 @@ const fetchData=async()=>{
         const response =await fetch(fetchApi);
         const result =await response.json();
         data=result.results
+        console.log('Fetched Data:', data);
     }catch(e){
         console.log('error coocured while calling fetchData',err);
     }
 }
 window.onload=()=>{
-    fetchData()
+    fetchData();
 }
 
 
@@ -127,7 +128,11 @@ const updateUI=async()=>{
 searchButton.addEventListener('click',()=>{
     updateUI();
 })
-searchInput.addEventListener('keydown',(e)=>{
+searchInput.addEventListener('keyup',(e)=>{
+    if (!data.length) {
+        console.log('Data not loaded yet');
+        return;
+    }
     if(e.key==='Enter'){
         updateUI();
     }
@@ -152,21 +157,22 @@ searchInput.addEventListener('keydown',(e)=>{
     dropDownCont.classList.remove('dd-hide');
         dropDownCont.classList.add('show');
         console.log('Dropdown shown'); 
-        dropDownCont.innerHTML='';
         showSuggestions(searchInput.value)
     }
 })
 const showSuggestions=(input)=>{
+    console.log('Input for suggestions:', input);
+    console.log('Current data:', data); 
     const filterData = data.filter(pokemon=>pokemon.name.startsWith(input));
     console.log('Filtered data:', filterData);
+    dropDownCont.innerHTML='';
     for(let obj of filterData){
         const {name}=obj;
-        // const btn =document.createElement('button');
-        // btn.classList.add('dd-btns');
-        // btn.textContent=name;
-        // btn.addEventListener('click',()=>{searchInput.value=name});
-        // dropDownCont.appendChild(btn);
-        dropDownCont.innerHTML+=`<button class='dd-btns' onclick='()=>{searchInput.value=${name}}'>${name}</button>`
+        const btn =document.createElement('button');
+        btn.classList.add('dd-btns');
+        btn.textContent=name;
+        btn.addEventListener('click',()=>{searchInput.value=name});
+        dropDownCont.appendChild(btn);
     }
 }
 // console.log('Data:', data);
