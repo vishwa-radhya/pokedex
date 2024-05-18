@@ -128,7 +128,8 @@ const updateUI=async()=>{
 searchButton.addEventListener('click',()=>{
     updateUI();
 })
-searchInput.addEventListener('keyup',(e)=>{
+searchInput.addEventListener('input',(e)=>{
+    const query = searchInput.value.toLowerCase();
     if (!data.length) {
         console.log('Data not loaded yet');
         return;
@@ -157,13 +158,14 @@ searchInput.addEventListener('keyup',(e)=>{
     dropDownCont.classList.remove('dd-hide');
         dropDownCont.classList.add('show');
         console.log('Dropdown shown'); 
-        showSuggestions(searchInput.value)
+        showSuggestions(query)
     }
 })
-const showSuggestions=(input)=>{
+const showSuggestions=(query)=>{
     console.log('Input for suggestions:', input);
     console.log('Current data:', data); 
-    const filterData = data.filter(pokemon=>pokemon.name.startsWith(input.toLowerCase()));
+    const filterData = data.filter(pokemon => pokemon.name.toLowerCase().startsWith(query));
+    // const filterData = data.filter(pokemon=>pokemon.name.startsWith(input.toLowerCase()));
     console.log('Filtered data:', filterData);
     dropDownCont.innerHTML='';
     for(let obj of filterData){
@@ -174,5 +176,15 @@ const showSuggestions=(input)=>{
         btn.addEventListener('click',()=>{searchInput.value=name});
         dropDownCont.appendChild(btn);
     }
+    filterData.forEach(pokemon=>{
+        const div =document.createElement('div');
+        div.classList.add('dd-btns');
+        div.textContent = pokemon.name;
+        div.addEventListener('click', () => {
+            searchInput.value = pokemon.name;
+            // dropdown.style.display = 'none';
+        });
+        dropDownCont.appendChild(div);
+    })
 }
 // console.log('Data:', data);
