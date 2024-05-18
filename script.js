@@ -127,7 +127,7 @@ const updateUI=async()=>{
 searchButton.addEventListener('click',()=>{
     updateUI();
 })
-searchInput.addEventListener('keyup',(e)=>{
+searchInput.addEventListener('keydown',(e)=>{
     if(e.key==='Enter'){
         updateUI();
     }
@@ -139,13 +139,13 @@ searchInput.addEventListener('keyup',(e)=>{
         dropDownCont.classList.remove('dd-hide');
         dropDownCont.classList.add('show');
         console.log('Dropdown shown'); 
+        dropDownCont.innerHTML='';
+        showSuggestions(searchInput.value);
     }
-    dropDownCont.innerHTML='';
-    showSuggestions(searchInput.value);
 })
 const showSuggestions=(input)=>{
     let filterData = data.filter(pokemon=>pokemon.name.startsWith(input));
-    console.log('Filtered data:', filterData);
+    // console.log('Filtered data:', filterData);
     for(let obj of filterData){
         const {name}=obj;
         const btn =document.createElement('button');
