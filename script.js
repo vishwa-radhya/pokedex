@@ -27,7 +27,6 @@ const fetchData=async()=>{
         const response =await fetch(fetchApi);
         const result =await response.json();
         data=result.results
-        console.log('Fetched Data:', data);
     }catch(e){
         console.log('error coocured while calling fetchData',err);
     }
@@ -97,7 +96,6 @@ const updateUI=async()=>{
         spinner.style.display='block'
     }
      input = filterInput(searchInput.value);
-     console.log('Updating UI with:', searchInput.value);
      dropDownCont.classList.remove('show')
         dropDownCont.classList.add('dd-hide')
     if(input===''){
@@ -140,33 +138,14 @@ searchInput.addEventListener('input',(e)=>{
     if(searchInput.value===''){
         dropDownCont.classList.remove('show');
         dropDownCont.classList.add('dd-hide');
-        console.log('Dropdown hidden');
     }else{
-        
-        // showSuggestions(searchInput.value);
-    //     const filterData = data.filter(pokemon=>pokemon.name.startsWith(searchInput.value));
-    // console.log('Filtered data:', filterData);
-    // for(let obj of filterData){
-    //     const {name}=obj;
-    //     // const btn =document.createElement('button');
-    //     // btn.classList.add('dd-btns');
-    //     // btn.textContent=name;
-    //     // btn.addEventListener('click',()=>{searchInput.value=name});
-    //     // dropDownCont.appendChild(btn);
-    //     dropDownCont.innerHTML+=`<button class='dd-btns' onclick='()=>{searchInput.value=${name}}'>${name}</button>`
-    // }
     dropDownCont.classList.remove('dd-hide');
         dropDownCont.classList.add('show');
-        console.log('Dropdown shown'); 
         showSuggestions(query)
     }
 })
 const showSuggestions=(query)=>{
-    console.log('Input for suggestions:', input);
-    console.log('Current data:', data); 
     const filterData = data.filter(pokemon => pokemon.name.toLowerCase().startsWith(query));
-    // const filterData = data.filter(pokemon=>pokemon.name.startsWith(input.toLowerCase()));
-    console.log('Filtered data:', filterData);
     dropDownCont.innerHTML='';
     for(let obj of filterData){
         const {name}=obj;
@@ -182,9 +161,7 @@ const showSuggestions=(query)=>{
         div.textContent = pokemon.name;
         div.addEventListener('click', () => {
             searchInput.value = pokemon.name;
-            // dropdown.style.display = 'none';
         });
         dropDownCont.appendChild(div);
     })
 }
-// console.log('Data:', data);

@@ -338,21 +338,22 @@ label{
         text-wrap: balance;
     }
     #drop-down-cont {
-        background-color: #3c6cd3;
+        background-color: rgb(229, 237, 239);
         overflow: auto;
         z-index: 1;
-        width: 90%; /* Adjust width for mobile */
-        left: 5%; /* Center horizontally */
-        top: auto; /* Adjust as necessary */
+        width: 60%; 
+        left: 10%; 
+        top: auto; 
     }
     .dd-btns {
-        background-color: brown;
+        background-color: #b1b1b1;
         color: ghostwhite;
         display: block;
         position: relative;
         font-size: 12px;
         width: 100%;
         z-index: 2;
+        text-align: center;
     }
  }
  
