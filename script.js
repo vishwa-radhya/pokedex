@@ -147,13 +147,8 @@ searchInput.addEventListener('input',(e)=>{
 const showSuggestions=(query)=>{
     const filterData = data.filter(pokemon => pokemon.name.toLowerCase().startsWith(query));
     dropDownCont.innerHTML='';
-    for(let obj of filterData){
-        const {name}=obj;
-        const btn =document.createElement('button');
-        btn.classList.add('dd-btns');
-        btn.textContent=name;
-        btn.addEventListener('click',()=>{searchInput.value=name});
-        dropDownCont.appendChild(btn);
+    if(filterData.length===0){
+        dropDownCont.innerHTML=`<p id='no-match'>NO MATCHES</p>`
     }
     filterData.forEach(pokemon=>{
         const div =document.createElement('div');
