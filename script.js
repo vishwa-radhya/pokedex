@@ -136,23 +136,37 @@ searchInput.addEventListener('keydown',(e)=>{
         dropDownCont.classList.add('dd-hide');
         console.log('Dropdown hidden');
     }else{
-        dropDownCont.classList.remove('dd-hide');
+        
+        // showSuggestions(searchInput.value);
+    //     const filterData = data.filter(pokemon=>pokemon.name.startsWith(searchInput.value));
+    // console.log('Filtered data:', filterData);
+    // for(let obj of filterData){
+    //     const {name}=obj;
+    //     // const btn =document.createElement('button');
+    //     // btn.classList.add('dd-btns');
+    //     // btn.textContent=name;
+    //     // btn.addEventListener('click',()=>{searchInput.value=name});
+    //     // dropDownCont.appendChild(btn);
+    //     dropDownCont.innerHTML+=`<button class='dd-btns' onclick='()=>{searchInput.value=${name}}'>${name}</button>`
+    // }
+    dropDownCont.classList.remove('dd-hide');
         dropDownCont.classList.add('show');
         console.log('Dropdown shown'); 
         dropDownCont.innerHTML='';
-        showSuggestions(searchInput.value);
+        showSuggestions(searchInput.value)
     }
 })
 const showSuggestions=(input)=>{
-    let filterData = data.filter(pokemon=>pokemon.name.startsWith(input));
-    // console.log('Filtered data:', filterData);
+    const filterData = data.filter(pokemon=>pokemon.name.startsWith(input));
+    console.log('Filtered data:', filterData);
     for(let obj of filterData){
         const {name}=obj;
-        const btn =document.createElement('button');
-        btn.classList.add('dd-btns');
-        btn.textContent=name;
-        btn.addEventListener('click',()=>{searchInput.value=name});
-        dropDownCont.appendChild(btn);
+        // const btn =document.createElement('button');
+        // btn.classList.add('dd-btns');
+        // btn.textContent=name;
+        // btn.addEventListener('click',()=>{searchInput.value=name});
+        // dropDownCont.appendChild(btn);
+        dropDownCont.innerHTML+=`<button class='dd-btns' onclick='()=>{searchInput.value=${name}}'>${name}</button>`
     }
 }
 // console.log('Data:', data);
