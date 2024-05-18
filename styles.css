@@ -114,6 +114,11 @@ label{
     text-align: center;
     overflow: hidden;
 }
+.dd-btns:active{
+    background-color: #8c8c82;
+    color: #0d0e10;
+    border: 2px solid rgb(216, 209, 209);
+}
  ::-webkit-scrollbar{
     width: 6px;
     z-index: 3;
