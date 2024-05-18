@@ -163,7 +163,7 @@ searchInput.addEventListener('keyup',(e)=>{
 const showSuggestions=(input)=>{
     console.log('Input for suggestions:', input);
     console.log('Current data:', data); 
-    const filterData = data.filter(pokemon=>pokemon.name.startsWith(input));
+    const filterData = data.filter(pokemon=>pokemon.name.startsWith(input.toLowerCase()));
     console.log('Filtered data:', filterData);
     dropDownCont.innerHTML='';
     for(let obj of filterData){
