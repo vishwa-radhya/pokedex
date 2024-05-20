@@ -56,6 +56,10 @@ const updateStats=(stats)=>{
     specialAttack.textContent=stat_array[3];
     specialDefense.textContent=stat_array[4];
     speed.textContent=stat_array[5];
+    if(!isLoading){
+        spinner.style.animation='stop-spin 1s ease-in-out infinite';
+        spinner.style.display='none';
+    }
 }
 
 const updateNameAndId=(name,id)=>{
@@ -107,10 +111,7 @@ const updateUI=async()=>{
         const response = await fetch(fetchApi+input);
         const result = await response.json() 
         isLoading=false;
-        if(!isLoading){
-            spinner.style.animation='stop-spin 1s ease-in-out infinite';
-            spinner.style.display='none';
-        }
+        
         const {height,id,name,sprites,stats,types,weight}=result;
         updateNameAndId(name,id);
         heightAndWeight(height,weight);
