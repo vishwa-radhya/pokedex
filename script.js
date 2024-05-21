@@ -142,7 +142,11 @@ searchInput.addEventListener('input',(e)=>{
     }else{
     dropDownCont.classList.remove('dd-hide');
         dropDownCont.classList.add('show');
-        showSuggestions(query)
+        if(/^[a-zA-Z]/.test(query)){
+            showSuggestions(query)
+        }else{
+            showSuggestionsForId();
+        }
     }
 })
 const showSuggestions=(query)=>{
@@ -160,4 +164,7 @@ const showSuggestions=(query)=>{
         });
         dropDownCont.appendChild(div);
     })
+}
+const showSuggestionsForId=()=>{
+    dropDownCont.innerHTML=`<p id='no-match-num'>Search between 1-10277.</p>`
 }
