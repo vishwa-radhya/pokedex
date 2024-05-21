@@ -145,7 +145,7 @@ searchInput.addEventListener('input',(e)=>{
         if(/^[a-zA-Z]/.test(query)){
             showSuggestions(query)
         }else{
-            showSuggestionsForId();
+            showSuggestionsForId(query);
         }
     }
 })
@@ -165,6 +165,19 @@ const showSuggestions=(query)=>{
         dropDownCont.appendChild(div);
     })
 }
-const showSuggestionsForId=()=>{
-    dropDownCont.innerHTML=`<p id='no-match-num'>Search between 1-10277.</p>`
+const showSuggestionsForId=(query)=>{
+    const filteredId=data.filter(pokemon=>pokemon.id.toString().startsWith(query.toString()));
+    dropDownCont.innerHTML='';
+    if(filteredId.length===0){
+    dropDownCont.innerHTML=`<p id='no-match-num'>NO MATCHES</p>`;
+    }
+    filteredId.forEach(pokemon=>{
+        const div =document.createElement('div');
+        div.classList.add('dd-btns');
+        div.textContent = pokemon.id;
+        div.addEventListener('click', () => {
+            searchInput.value = pokemon.id;
+        });
+        dropDownCont.appendChild(div);
+    })
 }
