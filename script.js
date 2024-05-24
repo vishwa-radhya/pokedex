@@ -20,6 +20,7 @@ const normalBtn=document.getElementById('normal-btn');
 const dropDownCont =document.getElementById('drop-down-cont')
 let isLoading = false;
 let isGlowing=false;
+let globalInput;
 let input;
 let animatedGifLink;
 let normalImgLink;
@@ -41,6 +42,15 @@ window.onload=()=>{
     animationBtn.hidden=true;
 }
 
+const spinnerOnandOff=()=>{
+    if(isLoading){
+        spinner.style.animation='spin 1s ease-in-out infinite';
+        spinner.style.display='block';
+    }else{
+        spinner.style.animation='stop-spin 1s ease-in-out infinite';
+        spinner.style.display='none';
+    }
+}
 
 bulb.addEventListener('click',()=>{
     isGlowing=!isGlowing;
@@ -62,10 +72,7 @@ const updateStats=(stats)=>{
     specialAttack.textContent=stat_array[3];
     specialDefense.textContent=stat_array[4];
     speed.textContent=stat_array[5];
-    if(!isLoading){
-        spinner.style.animation='stop-spin 1s ease-in-out infinite';
-        spinner.style.display='none';
-    }
+    spinnerOnandOff();
 }
 
 const updateNameAndId=(name,id)=>{
@@ -91,6 +98,7 @@ const updateImageAndTypes=(types,sprites,pokemon)=>{
 const filterInput=(input)=>input.replace(/[^a-zA-Z0-9-]/ig,'').toLowerCase();
 
 const updateUI=async()=>{
+    animationBtn.hidden=true;
     if(searchInput.value===''){
         return;
     }
@@ -100,11 +108,9 @@ const updateUI=async()=>{
     }
     pokemonType.innerHTML=''
     isLoading =true;
-    if(isLoading){
-        spinner.style.animation='spin 1s ease-in-out infinite';
-        spinner.style.display='block'
-    }
+    spinnerOnandOff();
      input = filterInput(searchInput.value);
+     globalInput=input;
      dropDownCont.classList.remove('show')
         dropDownCont.classList.add('dd-hide')
     if(input===''){
@@ -114,20 +120,14 @@ const updateUI=async()=>{
     }
     try{
         const response = await fetch(fetchApi+input);
-        const response2 =await fetch(fetchApi2+input);
         const result = await response.json();
-        const result2=await response2.json();
-        const link=result2.sprites.versions['generation-v']['black-white'].animated.front_default;
-        if(link){
-            animatedGifLink=link;
-        }
         isLoading=false;
-        
         const {height,id,name,sprites,stats,types,weight}=result;
         updateNameAndId(name,id);
         heightAndWeight(height,weight);
         updateImageAndTypes(types,sprites,name);
         updateStats(stats);
+        normalBtn.hidden=true;
         animationBtn.hidden=false;
     }catch(e){
         spinner.style.animation='stop-spin 1s ease-in-out infinite';
@@ -136,22 +136,43 @@ const updateUI=async()=>{
     }
 }
 
-animationBtn.addEventListener('click',()=>{
+animationBtn.addEventListener('click',async ()=>{
+    isLoading=true;
+    spinnerOnandOff();
+    try{
+        const response2 =await fetch(fetchApi2+globalInput);
+        const result2=await response2.json();
+        const link=result2.sprites.versions['generation-v']['black-white'].animated.front_default;
+            animatedGifLink=link;
+    }catch(e){
+        console.log(e);
+    }
+    if(!animatedGifLink){
+        alert('no animation available');
+        isLoading=false;
+        spinnerOnandOff();
+        return;
+    }
+    imgView.style.width='95px';
     imgView.src='';
-    imgView.style.width='110px';
     imgView.src=animatedGifLink;
-    // animationBtn.textContent='Normal';
-    // animationBtn.id='';
-    // animationBtn.id='normal-btn';
+    isLoading=false;
+    spinnerOnandOff();
+    animationBtn.hidden=true;
+    normalBtn.hidden=false;
 })
 
-// normalBtn.addEventListener('click',()=>{
-//     imgView.src='';
-//     normalBtn.id='';
-//     normalBtn.id='gif-btn'
-//     imgView.style.width='170px';
-//     imgView.src=normalImgLink;
-// })
+normalBtn.addEventListener('click',()=>{
+    imgView.style.width='170px';
+    isLoading=true;
+    spinnerOnandOff();
+    imgView.src='';
+    imgView.src=normalImgLink;
+    normalBtn.hidden=true;
+    animationBtn.hidden=false;
+    isLoading=false;
+    spinnerOnandOff();
+})
 
 searchButton.addEventListener('click',()=>{
     updateUI();
