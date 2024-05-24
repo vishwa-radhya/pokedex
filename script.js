@@ -81,20 +81,7 @@ const updateImageAndTypes=(types,sprites,pokemon)=>{
     }
 }
 
-//memoize test
-function filterInputOuter(){
-    const cache={};
-    return function(input){
-        if(input in cache){
-            console.log('cache: ',cache);
-            return cache[input];
-        }else{
-            cache[input]=input.replace(/[^a-zA-Z0-9-]/ig,'').toLowerCase();
-            return cache[input];
-        }
-    }
-}
-const filterInput=filterInputOuter();
+const filterInput=(input)=>input.replace(/[^a-zA-Z0-9-]/ig,'').toLowerCase();
 
 const updateUI=async()=>{
     if(searchInput.value===''){
@@ -111,7 +98,6 @@ const updateUI=async()=>{
         spinner.style.display='block'
     }
      input = filterInput(searchInput.value);
-     console.log('input:',input);
      dropDownCont.classList.remove('show')
         dropDownCont.classList.add('dd-hide')
     if(input===''){
@@ -145,9 +131,6 @@ searchInput.addEventListener('input',(e)=>{
         console.log('Data not loaded yet');
         return;
     }
-    if(e.key==='Enter'){
-        updateUI();
-    }
     if(searchInput.value===''){
         dropDownCont.classList.remove('show');
         dropDownCont.classList.add('dd-hide');
@@ -161,6 +144,13 @@ searchInput.addEventListener('input',(e)=>{
         }
     }
 })
+
+searchInput.addEventListener('keyup',(e)=>{
+    if(e.key==='Enter'){
+        updateUI();
+    }
+})
+
 const showSuggestions=(query)=>{
     const filterData = data.filter(pokemon => pokemon.name.toLowerCase().startsWith(query));
     dropDownCont.innerHTML='';
@@ -173,6 +163,7 @@ const showSuggestions=(query)=>{
         div.textContent = pokemon.name;
         div.addEventListener('click', () => {
             searchInput.value = pokemon.name;
+            searchInput.focus();
         });
         dropDownCont.appendChild(div);
     })
