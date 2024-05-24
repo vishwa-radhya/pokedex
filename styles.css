@@ -156,8 +156,7 @@ label{
 }
 
 .norm-and-anim:active{
-    background-color: ghostwhite;
-    color: black;
+    scale: 1.05;
 }
 
 #search-button{
@@ -219,7 +218,30 @@ label{
     display: flex;
     height: 150px;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
+    /* border: 1px solid; */
+}
+
+.mm-style{
+    font-family: "Orbitron", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  font-size: 17px;
+  background-color: #000;
+  color: ghostwhite;
+  border-radius: 8px;
+}
+.mm-style:active{
+    scale: 1.01;
+    background-color: #414244;
+}
+.mm-style:disabled{
+    cursor: not-allowed;
+    background-color: gray;
+}
+
+button{
+    outline: none;
 }
 
 #types{
