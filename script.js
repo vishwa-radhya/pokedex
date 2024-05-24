@@ -17,7 +17,9 @@ const bulb=document.getElementById('bulb')
 const info=document.getElementById('info')
 const animationBtn=document.getElementById('gif-btn');
 const normalBtn=document.getElementById('normal-btn');
-const dropDownCont =document.getElementById('drop-down-cont')
+const dropDownCont =document.getElementById('drop-down-cont');
+const maxBtn=document.getElementById('maximize');
+const minBtn=document.getElementById('manimize');
 let isLoading = false;
 let isGlowing=false;
 let globalInput;
@@ -40,7 +42,6 @@ const fetchData=async()=>{
 window.onload=()=>{
     fetchData();
     animationBtn.hidden=true;
-    normalize();
 }
 
 const spinnerOnandOff=()=>{
@@ -100,6 +101,7 @@ const filterInput=(input)=>input.replace(/[^a-zA-Z0-9-]/ig,'').toLowerCase();
 
 const updateUI=async()=>{
     animationBtn.hidden=true;
+    normalize();
     if(searchInput.value===''){
         return;
     }
@@ -154,14 +156,32 @@ animationBtn.addEventListener('click',async ()=>{
         spinnerOnandOff();
         return;
     }
-    imgView.style.width='95px';
+    imgView.style.width='107px';
     imgView.src='';
     imgView.src=animatedGifLink;
+    imgView.onload = () => {
+        const currentWidth = parseInt(window.getComputedStyle(imgView).width);
+        if (currentWidth >= 200) {
+            maxBtn.disabled = true;
+        } else {
+            maxBtn.disabled = false;
+        }
+
+        if (currentWidth <= 50) {
+            minBtn.disabled = true;
+        } else {
+            minBtn.disabled = false;
+        }
+    };
     isLoading=false;
     spinnerOnandOff();
     animationBtn.hidden=true;
     normalBtn.hidden=false;
 })
+
+const normalize=()=>{
+    imgView.style.width='170px';
+}
 
 normalBtn.addEventListener('click',()=>{
     imgView.style.width='170px';
@@ -169,15 +189,25 @@ normalBtn.addEventListener('click',()=>{
     spinnerOnandOff();
     imgView.src='';
     imgView.src=normalImgLink;
+    imgView.onload = () => {
+        const currentWidth = parseInt(window.getComputedStyle(imgView).width);
+        if (currentWidth >= 200) {
+            maxBtn.disabled = true;
+        } else {
+            maxBtn.disabled = false;
+        }
+
+        if (currentWidth <= 50) {
+            minBtn.disabled = true;
+        } else {
+            minBtn.disabled = false;
+        }
+    };
     normalBtn.hidden=true;
     animationBtn.hidden=false;
     isLoading=false;
     spinnerOnandOff();
 })
-
-const normalize=()=>{
-    imgView.style.width='170px';
-}
 
 searchButton.addEventListener('click',()=>{
     updateUI();
@@ -241,3 +271,29 @@ const showSuggestionsForId=(query)=>{
         dropDownCont.appendChild(div);
     })
 }
+
+maxBtn.addEventListener('click',()=>{
+    const currentWidth =parseInt(window.getComputedStyle(imgView).width);
+    imgView.style.width=(currentWidth+20)+'px';
+    if(currentWidth>=190){
+        maxBtn.disabled=true;
+    }else{
+        maxBtn.disabled=false;
+    }
+    if(currentWidth>50){
+        minBtn.disabled=false;
+    }
+})
+
+minBtn.addEventListener('click',()=>{
+    const currentWidth =parseInt(window.getComputedStyle(imgView).width);
+    imgView.style.width=(currentWidth-20)+'px';
+    if(currentWidth<=70){
+        minBtn.disabled=true;
+    }else{
+        minBtn.disabled=false;
+    }
+    if(currentWidth<200){
+        maxBtn.disabled=false;
+    }
+})
