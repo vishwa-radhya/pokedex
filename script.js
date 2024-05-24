@@ -15,11 +15,17 @@ const speed =document.getElementById('speed')
 const spinner =document.getElementById('loader')
 const bulb=document.getElementById('bulb')
 const info=document.getElementById('info')
+const animationBtn=document.getElementById('gif-btn');
+const normalBtn=document.getElementById('normal-btn');
 const dropDownCont =document.getElementById('drop-down-cont')
 let isLoading = false;
 let isGlowing=false;
+let globalInput;
 let input;
+let animatedGifLink;
+let normalImgLink;
 const fetchApi ='https://pokeapi-proxy.freecodecamp.rocks/api/pokemon/'
+const fetchApi2='https://pokeapi.co/api/v2/pokemon/';
 let data=[]
 
 const fetchData=async()=>{
@@ -33,8 +39,18 @@ const fetchData=async()=>{
 }
 window.onload=()=>{
     fetchData();
+    animationBtn.hidden=true;
 }
 
+const spinnerOnandOff=()=>{
+    if(isLoading){
+        spinner.style.animation='spin 1s ease-in-out infinite';
+        spinner.style.display='block';
+    }else{
+        spinner.style.animation='stop-spin 1s ease-in-out infinite';
+        spinner.style.display='none';
+    }
+}
 
 bulb.addEventListener('click',()=>{
     isGlowing=!isGlowing;
@@ -56,10 +72,7 @@ const updateStats=(stats)=>{
     specialAttack.textContent=stat_array[3];
     specialDefense.textContent=stat_array[4];
     speed.textContent=stat_array[5];
-    if(!isLoading){
-        spinner.style.animation='stop-spin 1s ease-in-out infinite';
-        spinner.style.display='none';
-    }
+    spinnerOnandOff();
 }
 
 const updateNameAndId=(name,id)=>{
@@ -73,6 +86,7 @@ const heightAndWeight=(height,weight)=>{
 }
 
 const updateImageAndTypes=(types,sprites,pokemon)=>{
+    normalImgLink=sprites.front_default;
     imgView.src=sprites.front_default;
     imgView.alt=pokemon;
     for(let num of types){
@@ -84,6 +98,7 @@ const updateImageAndTypes=(types,sprites,pokemon)=>{
 const filterInput=(input)=>input.replace(/[^a-zA-Z0-9-]/ig,'').toLowerCase();
 
 const updateUI=async()=>{
+    animationBtn.hidden=true;
     if(searchInput.value===''){
         return;
     }
@@ -93,11 +108,9 @@ const updateUI=async()=>{
     }
     pokemonType.innerHTML=''
     isLoading =true;
-    if(isLoading){
-        spinner.style.animation='spin 1s ease-in-out infinite';
-        spinner.style.display='block'
-    }
+    spinnerOnandOff();
      input = filterInput(searchInput.value);
+     globalInput=input;
      dropDownCont.classList.remove('show')
         dropDownCont.classList.add('dd-hide')
     if(input===''){
@@ -107,20 +120,59 @@ const updateUI=async()=>{
     }
     try{
         const response = await fetch(fetchApi+input);
-        const result = await response.json() 
+        const result = await response.json();
         isLoading=false;
-        
         const {height,id,name,sprites,stats,types,weight}=result;
         updateNameAndId(name,id);
         heightAndWeight(height,weight);
         updateImageAndTypes(types,sprites,name);
         updateStats(stats);
+        normalBtn.hidden=true;
+        animationBtn.hidden=false;
     }catch(e){
         spinner.style.animation='stop-spin 1s ease-in-out infinite';
         spinner.style.display='none';
         alert('error occured or undetermined id')
     }
 }
+
+animationBtn.addEventListener('click',async ()=>{
+    isLoading=true;
+    spinnerOnandOff();
+    try{
+        const response2 =await fetch(fetchApi2+globalInput);
+        const result2=await response2.json();
+        const link=result2.sprites.versions['generation-v']['black-white'].animated.front_default;
+            animatedGifLink=link;
+    }catch(e){
+        console.log(e);
+    }
+    if(!animatedGifLink){
+        alert('no animation available');
+        isLoading=false;
+        spinnerOnandOff();
+        return;
+    }
+    imgView.style.width='95px';
+    imgView.src='';
+    imgView.src=animatedGifLink;
+    isLoading=false;
+    spinnerOnandOff();
+    animationBtn.hidden=true;
+    normalBtn.hidden=false;
+})
+
+normalBtn.addEventListener('click',()=>{
+    imgView.style.width='170px';
+    isLoading=true;
+    spinnerOnandOff();
+    imgView.src='';
+    imgView.src=normalImgLink;
+    normalBtn.hidden=true;
+    animationBtn.hidden=false;
+    isLoading=false;
+    spinnerOnandOff();
+})
 
 searchButton.addEventListener('click',()=>{
     updateUI();
