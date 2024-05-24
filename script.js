@@ -81,9 +81,20 @@ const updateImageAndTypes=(types,sprites,pokemon)=>{
     }
 }
 
-const filterInput=input=>{
-    return input.replace(/[^a-zA-Z0-9-]/g,'').toLowerCase();
+//memoize test
+function filterInputOuter(){
+    const cache={};
+    return function(input){
+        if(input in cache){
+            console.log('cache: ',cache);
+            return cache[input];
+        }else{
+            cache[input]=input.replace(/[^a-zA-Z0-9-]/ig,'').toLowerCase();
+            return cache[input];
+        }
+    }
 }
+const filterInput=filterInputOuter();
 
 const updateUI=async()=>{
     if(searchInput.value===''){
@@ -100,6 +111,7 @@ const updateUI=async()=>{
         spinner.style.display='block'
     }
      input = filterInput(searchInput.value);
+     console.log('input:',input);
      dropDownCont.classList.remove('show')
         dropDownCont.classList.add('dd-hide')
     if(input===''){
