@@ -40,6 +40,7 @@ const fetchData=async()=>{
 window.onload=()=>{
     fetchData();
     animationBtn.hidden=true;
+    normalize();
 }
 
 const spinnerOnandOff=()=>{
@@ -173,6 +174,10 @@ normalBtn.addEventListener('click',()=>{
     isLoading=false;
     spinnerOnandOff();
 })
+
+const normalize=()=>{
+    imgView.style.width='170px';
+}
 
 searchButton.addEventListener('click',()=>{
     updateUI();
