@@ -15,11 +15,16 @@ const speed =document.getElementById('speed')
 const spinner =document.getElementById('loader')
 const bulb=document.getElementById('bulb')
 const info=document.getElementById('info')
+const animationBtn=document.getElementById('gif-btn');
+const normalBtn=document.getElementById('normal-btn');
 const dropDownCont =document.getElementById('drop-down-cont')
 let isLoading = false;
 let isGlowing=false;
 let input;
+let animatedGifLink;
+let normalImgLink;
 const fetchApi ='https://pokeapi-proxy.freecodecamp.rocks/api/pokemon/'
+const fetchApi2='https://pokeapi.co/api/v2/pokemon/';
 let data=[]
 
 const fetchData=async()=>{
@@ -33,6 +38,7 @@ const fetchData=async()=>{
 }
 window.onload=()=>{
     fetchData();
+    animationBtn.hidden=true;
 }
 
 
@@ -73,6 +79,7 @@ const heightAndWeight=(height,weight)=>{
 }
 
 const updateImageAndTypes=(types,sprites,pokemon)=>{
+    normalImgLink=sprites.front_default;
     imgView.src=sprites.front_default;
     imgView.alt=pokemon;
     for(let num of types){
@@ -107,7 +114,13 @@ const updateUI=async()=>{
     }
     try{
         const response = await fetch(fetchApi+input);
-        const result = await response.json() 
+        const response2 =await fetch(fetchApi2+input);
+        const result = await response.json();
+        const result2=await response2.json();
+        const link=result2.sprites.versions['generation-v']['black-white'].animated.front_default;
+        if(link){
+            animatedGifLink=link;
+        }
         isLoading=false;
         
         const {height,id,name,sprites,stats,types,weight}=result;
@@ -115,12 +128,30 @@ const updateUI=async()=>{
         heightAndWeight(height,weight);
         updateImageAndTypes(types,sprites,name);
         updateStats(stats);
+        animationBtn.hidden=false;
     }catch(e){
         spinner.style.animation='stop-spin 1s ease-in-out infinite';
         spinner.style.display='none';
         alert('error occured or undetermined id')
     }
 }
+
+animationBtn.addEventListener('click',()=>{
+    imgView.src='';
+    imgView.style.width='110px';
+    imgView.src=animatedGifLink;
+    // animationBtn.textContent='Normal';
+    // animationBtn.id='';
+    // animationBtn.id='normal-btn';
+})
+
+// normalBtn.addEventListener('click',()=>{
+//     imgView.src='';
+//     normalBtn.id='';
+//     normalBtn.id='gif-btn'
+//     imgView.style.width='170px';
+//     imgView.src=normalImgLink;
+// })
 
 searchButton.addEventListener('click',()=>{
     updateUI();

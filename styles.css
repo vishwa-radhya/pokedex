@@ -141,6 +141,25 @@ label{
     border-radius:13px ;
     text-align: center;
 }
+
+.norm-and-anim{
+    font-family: "Orbitron", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  position: relative;
+  left: 70%;
+  top: -5.1%;
+  border-radius: 3px;
+  padding: 2.5px;
+  background-color: rgb(0, 0, 0);
+  color: ghostwhite;
+}
+
+.norm-and-anim:active{
+    background-color: ghostwhite;
+    color: black;
+}
+
 #search-button{
     font-family: "Orbitron", sans-serif;
   font-optical-sizing: auto;
@@ -190,6 +209,7 @@ label{
     text-align: center;
     width: 70px;
     border: 1px solid black;
+    border-radius: 1px;
 }
 #height{
     margin-left: 20px;
