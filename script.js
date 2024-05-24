@@ -275,7 +275,7 @@ const showSuggestionsForId=(query)=>{
 maxBtn.addEventListener('click',()=>{
     const currentWidth =parseInt(window.getComputedStyle(imgView).width);
     imgView.style.width=(currentWidth+20)+'px';
-    if(currentWidth>=190){
+    if(currentWidth>=180){
         maxBtn.disabled=true;
     }else{
         maxBtn.disabled=false;
@@ -288,7 +288,7 @@ maxBtn.addEventListener('click',()=>{
 minBtn.addEventListener('click',()=>{
     const currentWidth =parseInt(window.getComputedStyle(imgView).width);
     imgView.style.width=(currentWidth-20)+'px';
-    if(currentWidth<=70){
+    if(currentWidth<=75){
         minBtn.disabled=true;
     }else{
         minBtn.disabled=false;
