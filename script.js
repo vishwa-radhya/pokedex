@@ -1,25 +1,27 @@
-const searchInput =document.getElementById('search-input')
-const searchButton =document.getElementById('search-button')
-const pokemonName =document.getElementById('pokemon-name')
-const pokemonId =document.getElementById('pokemon-id')
-const pokemonWeight =document.getElementById('weight')
-const pokemonHeight =document.getElementById('height')
-const imgView =document.getElementById('sprite')
-const pokemonType =document.getElementById('types')
-const hp =document.getElementById('hp')
-const attack =document.getElementById('attack')
-const defense =document.getElementById('defense')
-const specialAttack =document.getElementById('special-attack')
-const specialDefense =document.getElementById('special-defense')
-const speed =document.getElementById('speed')
-const spinner =document.getElementById('loader')
-const bulb=document.getElementById('bulb')
-const info=document.getElementById('info')
+const searchInput =document.getElementById('search-input');
+const container=document.getElementById('container');
+const searchButton =document.getElementById('search-button');
+const pokemonName =document.getElementById('pokemon-name');
+const pokemonId =document.getElementById('pokemon-id');
+const pokemonWeight =document.getElementById('weight');
+const pokemonHeight =document.getElementById('height');
+const imgView =document.getElementById('sprite');
+const pokemonType =document.getElementById('types');
+const hp =document.getElementById('hp');
+const attack =document.getElementById('attack');
+const defense =document.getElementById('defense');
+const specialAttack =document.getElementById('special-attack');
+const specialDefense =document.getElementById('special-defense');
+const speed =document.getElementById('speed');
+const spinner =document.getElementById('loader');
+const bulb=document.getElementById('bulb');
+const info=document.getElementById('info');
 const animationBtn=document.getElementById('gif-btn');
 const normalBtn=document.getElementById('normal-btn');
 const dropDownCont =document.getElementById('drop-down-cont');
 const maxBtn=document.getElementById('maximize');
 const minBtn=document.getElementById('manimize');
+const t_loader=document.getElementById('t-loader');
 let isLoading = false;
 let isGlowing=false;
 let globalInput;
@@ -32,16 +34,18 @@ let data=[]
 
 const fetchData=async()=>{
     try{
+        t_loader.hidden=false;
         const response =await fetch(fetchApi);
         const result =await response.json();
-        data=result.results
+        data=result.results;
+        t_loader.hidden=true;
+    container.hidden=false;
     }catch(e){
-        console.log('error coocured while calling fetchData',err);
+        alert('error occured try after few moments');
     }
 }
 window.onload=()=>{
     fetchData();
-    animationBtn.hidden=true;
 }
 
 const spinnerOnandOff=()=>{
@@ -148,7 +152,7 @@ animationBtn.addEventListener('click',async ()=>{
         const link=result2.sprites.versions['generation-v']['black-white'].animated.front_default;
             animatedGifLink=link;
     }catch(e){
-        console.log(e);
+        alert('error with animation try after some time');
     }
     if(!animatedGifLink){
         alert('no animation available');

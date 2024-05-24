@@ -14,7 +14,8 @@
     <h2>Pokemon Search App
     <img src="assets/bulb-svgrepo-com.svg" id="bulb" alt="light-bulb" width="35px">
     </h2>
-    <div id="container">
+    <div class="t-loader" id="t-loader" hidden></div>
+    <div id="container" hidden>
         <label for="search-input">
             Search for Pokemon Name or ID:
         </label>
@@ -41,7 +42,7 @@
         </div>
         <div id="types">
         </div>
-        <button id="gif-btn" class="norm-and-anim">Animation</button>
+        <button id="gif-btn" class="norm-and-anim" hidden>Animation</button>
         <button id="normal-btn" class="norm-and-anim" hidden>Normal</button>
         <div id="stats-cont">
             <div class="stat gt">Base</div>
@@ -73,7 +74,6 @@
             please refresh the page.</li>
         </ul>
     </div>
-    <script src="tst.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

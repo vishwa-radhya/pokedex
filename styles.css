@@ -431,3 +431,36 @@ button{
   font-weight: 500;
   color: rgb(103, 116, 136);
  }
+ .t-loader {
+    position: relative;
+    width: 64px;
+    height: 64px;
+    background-color: rgba(255, 255, 255, 0.5);
+    transform: rotate(45deg);
+    overflow: hidden;
+    top: 250px;
+    
+  }
+  .t-loader:after{
+    content: '';
+    position: absolute;
+    inset: 8px;
+    margin: auto;
+    background: #222b32;
+  }
+  .t-loader:before{
+    content: '';
+    position: absolute;
+    inset: -15px;
+    margin: auto;
+    background: #de3500;
+    animation: diamondLoader 2s linear infinite;
+  }
+  @keyframes diamondLoader {
+    0%  ,10% {
+      transform: translate(-64px , -64px) rotate(-45deg)
+    }
+    90% , 100% {
+      transform: translate(0px , 0px) rotate(-45deg)
+    }
+  }
