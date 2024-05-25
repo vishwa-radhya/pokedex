@@ -23,9 +23,11 @@ const maxBtn=document.getElementById('maximize');
 const minBtn=document.getElementById('manimize');
 const t_loader=document.getElementById('t-loader');
 const noAnimationMsg=document.getElementById('no-anim');
+const pokemonSoundElement=document.getElementById('music');
 let isLoading = false;
 let isGlowing=false;
 let globalInput;
+let globalPokemonName;
 let input;
 let animatedGifLink;
 let normalImgLink;
@@ -134,6 +136,7 @@ const updateUI=async()=>{
         const result = await response.json();
         isLoading=false;
         const {height,id,name,sprites,stats,types,weight}=result;
+        globalPokemonName=name;
         updateNameAndId(name,id);
         heightAndWeight(height,weight);
         updateImageAndTypes(types,sprites,name);
@@ -186,6 +189,15 @@ animationBtn.addEventListener('click',async ()=>{
     animationBtn.hidden=true;
     normalBtn.hidden=false;
 })
+
+const playPokemonSound=()=>{
+    if(globalPokemonName=='pikachu'){
+        pokemonSoundElement.src='./sounds-beta/pikachu-c.mp3';
+        pokemonSoundElement.autoplay=true;
+    }else{
+        return;
+    }
+}
 
 const normalize=()=>{
     imgView.style.width='170px';
@@ -306,3 +318,5 @@ minBtn.addEventListener('click',()=>{
         maxBtn.disabled=false;
     }
 })
+
+imgView.addEventListener('click',playPokemonSound);
