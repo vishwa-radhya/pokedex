@@ -22,6 +22,7 @@ const dropDownCont =document.getElementById('drop-down-cont');
 const maxBtn=document.getElementById('maximize');
 const minBtn=document.getElementById('manimize');
 const t_loader=document.getElementById('t-loader');
+const noAnimationMsg=document.getElementById('no-anim');
 let isLoading = false;
 let isGlowing=false;
 let globalInput;
@@ -105,6 +106,7 @@ const filterInput=(input)=>input.replace(/[^a-zA-Z0-9-]/ig,'').toLowerCase();
 
 const updateUI=async()=>{
     animationBtn.hidden=true;
+    noAnimationMsg.hidden=true;
     normalize();
     if(searchInput.value===''){
         return;
@@ -155,9 +157,9 @@ animationBtn.addEventListener('click',async ()=>{
         alert('error with animation try after some time');
     }
     if(!animatedGifLink){
-        alert('no animation available');
         isLoading=false;
         spinnerOnandOff();
+        noAnimationMsg.hidden=false;
         return;
     }
     imgView.style.width='107px';
@@ -188,6 +190,7 @@ const normalize=()=>{
 }
 
 normalBtn.addEventListener('click',()=>{
+    noAnimationMsg.hidden=true;
     imgView.style.width='170px';
     isLoading=true;
     spinnerOnandOff();
