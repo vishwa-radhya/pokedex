@@ -43,6 +43,8 @@ const fetchData=async()=>{
     container.hidden=false;
     }catch(e){
         alert('error occured try after few moments');
+        t_loader.hidden=true;
+        return;
     }
 }
 window.onload=()=>{
