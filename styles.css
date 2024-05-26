@@ -2,12 +2,17 @@
     box-sizing: border-box;
     margin: 0;
 }
+
 body{
     display: flex;
     flex-direction: column;
     align-items: center;
     background-color: #a0d2eb;
+    font-family: "Orbitron", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
 }
+
 #info{
     border: 2px solid black;
     position: absolute;
@@ -17,48 +22,47 @@ body{
     background-color: #3c6cd3;
     color: ghostwhite;
     border-radius: 15px;
-    font-family: "Orbitron", sans-serif;
-  font-optical-sizing: auto;
-  font-style: normal;
-  text-wrap: wrap;
-  font-size: 12px;
-  text-align:left;
-  overflow: hidden;
-  box-shadow: -7px -7px 2px rgb(251, 244, 244);
-  z-index: 10;
-  font-weight: 500;
-  display: none;
-  /* font-variant: normal; */
+    text-wrap: wrap;
+    font-size: 12px;
+    text-align:left;
+    overflow: hidden;
+    box-shadow: -7px -7px 2px rgb(251, 244, 244);
+    z-index: 10;
+    font-weight: 500;
+    display: none;
 }
+
 #bulb{
     position: relative;
     left: 10px;
     top: 9px;
 }
+
 #bulb:active{
     scale: 1.2;
 }
+
 #info ul{
     position: relative;
     left: -13px;
     top: 10px;   
 }
+
 #info li{
     list-style:circle;
     margin-bottom: 4px;
     letter-spacing: 0.05px;
-  text-wrap: wrap;
+    text-wrap: wrap;
 
 }
+
 h2{
     text-align: center;
     margin-top: 15px;
-    font-family: "Orbitron", sans-serif;
-  font-optical-sizing: auto;
-  font-style: normal;
     color: rgb(2, 2, 2);
     text-shadow: 2px 4px rgb(98, 174, 184);
 }
+
 #container{
     border: 2px solid rgb(6, 6, 7);
     width: min(370px,95vw);
@@ -70,23 +74,22 @@ h2{
     overflow: hidden;
     position: relative;
 }
+
 label{
     text-align: center;
     width: auto;
     display: block;
     padding: 8px;
     font-weight: 500;
-    font-family: "Orbitron", sans-serif;
-  font-optical-sizing: auto;
-  font-style: normal;
 }
+
 #input-and-btn-cont{
     width: auto;
     display: flex;
     justify-content: center;
     padding: 3px;
-    
 }
+
 #drop-down-cont {
     border: 1px solid black;
     position: absolute;
@@ -98,6 +101,7 @@ label{
     background-color: rgb(229, 237, 239);
     overflow: auto;
 }
+
 .dd-btns {
     border: 1px solid rgb(26, 33, 32);
     height: 24px;
@@ -105,54 +109,61 @@ label{
     width: 100%; /* Ensure full width */
     background-color: #b1b1b1;
     color: ghostwhite;
-    font-family: "Orbitron", sans-serif;
-    font-optical-sizing: auto;
-    font-style: normal;
     border-radius: 2px;
     font-weight: 600;
     letter-spacing: 0.5px;
     text-align: center;
     overflow: hidden;
 }
+
 .dd-btns:active{
     background-color: #8c8c82;
     color: #0d0e10;
     border: 2px solid rgb(216, 209, 209);
 }
+
  ::-webkit-scrollbar{
     width: 6px;
     z-index: 3;
     background-color: rgb(145, 142, 142);
  }
+
  ::-webkit-scrollbar:horizontal{
     display: none;
  }
+
  ::-webkit-scrollbar-thumb{
     background-color: rgb(16, 17, 17);
  }
+
  #drop-down-cont .show{
     display:block;
  }
+
  .dd-hide{
     display: none;
  }
+
 #search-input{
     font-size: medium;
     border-radius:13px ;
     text-align: center;
 }
 
+button{
+    background-color: rgb(0, 0, 0);
+    color: ghostwhite;
+}
+
 .norm-and-anim{
+    position: relative;
+    left: 70%;
+    top: -5.1%;
+    border-radius: 3px;
+    padding: 2.5px;
     font-family: "Orbitron", sans-serif;
-  font-optical-sizing: auto;
-  font-style: normal;
-  position: relative;
-  left: 70%;
-  top: -5.1%;
-  border-radius: 3px;
-  padding: 2.5px;
-  background-color: rgb(0, 0, 0);
-  color: ghostwhite;
+    font-optical-sizing: auto;
+    font-style: normal;
 }
 
 .norm-and-anim:active{
@@ -160,81 +171,79 @@ label{
 }
 
 #search-button{
-    font-family: "Orbitron", sans-serif;
-  font-optical-sizing: auto;
-  font-style: normal;
-    background-color: black;
-    color: ghostwhite;
     border-radius: 13px;
     margin-left: 9px;
+    font-family: "Orbitron", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
 }
+
 #search-button:active{
     background-color: ghostwhite;
     color: rgb(0, 0, 0);
 }
+
 #name-and-id-cont{
     width: auto;
     display: flex;
     justify-content: flex-start;
     padding: 3px;
-    font-family: "Orbitron", sans-serif;
-  font-optical-sizing: auto;
-  font-style: normal;
 }
+
 #pokemon-name{
     margin-left: 10px;
 }
+
 #pokemon-id{
     margin-left: 29px;
 }
+
 #weight-and-height-cont{
     width: auto;
     display: flex;
     justify-content: flex-start;
     padding: 4px;
     border: 0;
-    font-family: "Orbitron", sans-serif;
-  font-optical-sizing: auto;
-  font-style: normal;
   font-weight: 400;
 }
+
 #weight{
     margin-left: 9px;
 }
+
 #sprite{
     width: 170px;
 }
+
 .cent{
     text-align: center;
     width: 70px;
     border: 1px solid black;
     border-radius: 1px;
 }
+
 #height{
     margin-left: 20px;
 }
+
 #img-cont{
     width: auto;
     display: flex;
     height: 150px;
     align-items: center;
     justify-content: space-between;
-    /* border: 1px solid; */
 }
 
 .mm-style{
-    font-family: "Orbitron", sans-serif;
-  font-optical-sizing: auto;
-  font-style: normal;
   font-size: 17px;
-  background-color: #000;
-  color: ghostwhite;
   border-radius: 8px;
 }
+
 .mm-style:active{
     scale: 1.01;
     background-color: #414244;
 }
+
 .mm-style:disabled{
     cursor: not-allowed;
     background-color: gray;
@@ -250,10 +259,8 @@ button{
     margin: 5px 0px 7px 20px;
     display: flex;
     justify-content: space-around;
-    font-family: "Orbitron", sans-serif;
-  font-optical-sizing: auto;
-  font-style: normal;
 }
+
 #stats-cont{
     width: 100%;
     display: grid;
@@ -261,15 +268,14 @@ button{
     gap: 5px;
     height: calc(600px - 320px);
     padding: 5px 8px;
-    font-family: "Orbitron", sans-serif;
-  font-optical-sizing: auto;
-  font-style: normal;
 }
+
 .gt{
     grid-column-start: 1;
     grid-column-end: 3;
     
 }
+
 .stat{
     background-color: rgb(211, 229, 110);
     text-align: center;
@@ -278,6 +284,7 @@ button{
     box-shadow: 2px 2px black;
     font-weight: 600;
 }
+
 .electric{
     background-color: rgb(226, 255, 4);
     color: black;
@@ -356,6 +363,7 @@ button{
     background-color: rgb(17, 15, 15);
     color: ghostwhite;
 }
+
 #loader{
     display: inline-block;
     position: relative;
@@ -368,6 +376,7 @@ button{
     animation: stop-spin 1s ease-in-out infinite;
     display:none;
 }
+
 @keyframes spin {
   to {
     -webkit-transform: rotate(360deg);
@@ -378,6 +387,7 @@ button{
     -webkit-transform: rotate(360deg);
   }
 }
+
 @keyframes stop-spin{}
 
 @media screen and (max-width:475px){
@@ -404,34 +414,32 @@ button{
         text-align: center;
     }
  }
- input[type='search']::-webkit-search-cancel-button{
+
+input[type='search']::-webkit-search-cancel-button{
     -webkit-appearance: none;
     background-color: #341f51;
     height: 20px;
     width: 20px;  
     -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23777'><path d='M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z'/></svg>");
  }
- #no-match{
+
+#no-match{
     text-align: center;
-    font-family: "Orbitron", sans-serif;
-  font-optical-sizing: auto;
-  font-style: normal;
-  margin-top: 40px;
-  font-size:medium;
-  font-weight: 500;
-  color: rgb(103, 116, 136);
+    margin-top: 40px;
+    font-size:medium;
+    font-weight: 500;
+    color: rgb(103, 116, 136);
  }
- #no-match-num{
+
+#no-match-num{
     text-align: center;
-    font-family: "Orbitron", sans-serif;
-  font-optical-sizing: auto;
-  font-style: normal;
-  margin-top: 40px;
-  font-size:small;
-  font-weight: 500;
-  color: rgb(103, 116, 136);
+    margin-top: 40px;
+    font-size:small;
+    font-weight: 500;
+    color: rgb(103, 116, 136);
  }
- .t-loader {
+
+.t-loader {
     position: relative;
     width: 64px;
     height: 64px;
@@ -439,16 +447,17 @@ button{
     transform: rotate(45deg);
     overflow: hidden;
     top: 250px;
-    
   }
-  .t-loader:after{
+
+.t-loader:after{
     content: '';
     position: absolute;
     inset: 8px;
     margin: auto;
     background: #222b32;
   }
-  .t-loader:before{
+
+.t-loader:before{
     content: '';
     position: absolute;
     inset: -15px;
@@ -456,7 +465,8 @@ button{
     background: #de3500;
     animation: diamondLoader 2s linear infinite;
   }
-  @keyframes diamondLoader {
+
+@keyframes diamondLoader {
     0%  ,10% {
       transform: translate(-64px , -64px) rotate(-45deg)
     }
@@ -464,12 +474,10 @@ button{
       transform: translate(0px , 0px) rotate(-45deg)
     }
   }
+
 #no-anim{
     text-align: center;
-    font-family: "Orbitron", sans-serif;
-  font-optical-sizing: auto;
-  font-style: normal;
-  color: #121212;
-  font-weight: 500;
-  margin-top: -18px;
+    color: #121212;
+    font-weight: 500;
+    margin-top: -18px;
 }

@@ -66,9 +66,9 @@ const spinnerOnandOff=()=>{
 bulb.addEventListener('click',()=>{
     isGlowing=!isGlowing;
     if(isGlowing){
-        info.style.display='block'
+        info.style.display='block';
     }else{
-        info.style.display='none'
+        info.style.display='none';
     }
 })
 
@@ -124,8 +124,7 @@ const updateUI=async()=>{
     spinnerOnandOff();
      input = filterInput(searchInput.value);
      globalInput=input;
-     dropDownCont.classList.remove('show')
-        dropDownCont.classList.add('dd-hide')
+     dropDownCont.classList.replace('show','dd-hide');
     if(input===''){
         spinner.style.animation='stop-spin 1s ease-in-out infinite';
         spinner.style.display='none';
@@ -240,11 +239,9 @@ searchInput.addEventListener('input',(e)=>{
         return;
     }
     if(searchInput.value===''){
-        dropDownCont.classList.remove('show');
-        dropDownCont.classList.add('dd-hide');
+        dropDownCont.classList.replace('show','dd-hide');
     }else{
-    dropDownCont.classList.remove('dd-hide');
-        dropDownCont.classList.add('show');
+    dropDownCont.classList.replace('dd-hide','show');
         if(/^[a-zA-Z]/.test(query)){
             showSuggestions(query)
         }else{
