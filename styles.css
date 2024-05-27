@@ -237,6 +237,7 @@ button{
 .mm-style{
   font-size: 17px;
   border-radius: 8px;
+  width: 28px;
 }
 
 .mm-style:active{
