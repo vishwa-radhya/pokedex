@@ -65,11 +65,7 @@ const spinnerOnandOff=()=>{
 
 bulb.addEventListener('click',()=>{
     isGlowing=!isGlowing;
-    if(isGlowing){
-        info.style.display='block';
-    }else{
-        info.style.display='none';
-    }
+    isGlowing ? info.style.display='block' : info.style.display='none';
 })
 
 const updateStats=(stats)=>{
@@ -77,12 +73,10 @@ const updateStats=(stats)=>{
     for(let st of stats){
         stat_array.push(st.base_stat)
     }
-    hp.textContent=stat_array[0];
-    attack.textContent=stat_array[1];
-    defense.textContent=stat_array[2];
-    specialAttack.textContent=stat_array[3];
-    specialDefense.textContent=stat_array[4];
-    speed.textContent=stat_array[5];
+    const avail_stats=[hp,attack,defense,specialAttack,specialDefense,speed];
+    avail_stats.forEach((stat,index)=>{
+        stat.textContent=stat_array[index];
+    })
     spinnerOnandOff();
 }
 
@@ -169,20 +163,7 @@ animationBtn.addEventListener('click',async ()=>{
     imgView.style.width='107px';
     imgView.src='';
     imgView.src=animatedGifLink;
-    imgView.onload = () => {
-        const currentWidth = parseInt(window.getComputedStyle(imgView).width);
-        if (currentWidth >= 200) {
-            maxBtn.disabled = true;
-        } else {
-            maxBtn.disabled = false;
-        }
-
-        if (currentWidth <= 50) {
-            minBtn.disabled = true;
-        } else {
-            minBtn.disabled = false;
-        }
-    };
+    btnAdjusterWithImageLoad();
     isLoading=false;
     spinnerOnandOff();
     animationBtn.hidden=true;
@@ -202,6 +183,14 @@ const normalize=()=>{
     imgView.style.width='170px';
 }
 
+const btnAdjusterWithImageLoad=()=>{
+    imgView.onload = () => {
+        const currentWidth = parseInt(window.getComputedStyle(imgView).width);
+        currentWidth >= 200 ? maxBtn.disabled=true : maxBtn.disabled=false;
+        currentWidth <=50 ? minBtn.disabled=true : minBtn.disabled=false;
+    };
+}
+
 normalBtn.addEventListener('click',()=>{
     noAnimationMsg.hidden=true;
     imgView.style.width='170px';
@@ -209,20 +198,7 @@ normalBtn.addEventListener('click',()=>{
     spinnerOnandOff();
     imgView.src='';
     imgView.src=normalImgLink;
-    imgView.onload = () => {
-        const currentWidth = parseInt(window.getComputedStyle(imgView).width);
-        if (currentWidth >= 200) {
-            maxBtn.disabled = true;
-        } else {
-            maxBtn.disabled = false;
-        }
-
-        if (currentWidth <= 50) {
-            minBtn.disabled = true;
-        } else {
-            minBtn.disabled = false;
-        }
-    };
+    btnAdjusterWithImageLoad();
     normalBtn.hidden=true;
     animationBtn.hidden=false;
     isLoading=false;
@@ -258,33 +234,25 @@ searchInput.addEventListener('keyup',(e)=>{
 
 const showSuggestions=(query)=>{
     const filterData = data.filter(pokemon => pokemon.name.toLowerCase().startsWith(query));
-    dropDownCont.innerHTML='';
-    if(filterData.length===0){
-        dropDownCont.innerHTML=`<p id='no-match'>NO MATCHES</p>`
-    }
-    filterData.forEach(pokemon=>{
-        const div =document.createElement('div');
-        div.classList.add('dd-btns');
-        div.textContent = pokemon.name;
-        div.addEventListener('click', () => {
-            searchInput.value = pokemon.name;
-            searchInput.focus();
-        });
-        dropDownCont.appendChild(div);
-    })
+    handleSuggestions(filterData,true);
 }
 const showSuggestionsForId=(query)=>{
     const filteredId=data.filter(pokemon=>pokemon.id.toString().startsWith(query.toString()));
+    handleSuggestions(filteredId,false);
+}
+
+const handleSuggestions=(filteredArray,isName)=>{
     dropDownCont.innerHTML='';
-    if(filteredId.length===0){
-    dropDownCont.innerHTML=`<p id='no-match-num'>NO MATCHES</p>`;
+    if(filteredArray.length===0){
+        isName ? dropDownCont.innerHTML=`<p id='no-match'>NO MATCHES</p>` : dropDownCont.innerHTML=`<p id='no-match-num'>NO MATCHES</p>`;
     }
-    filteredId.forEach(pokemon=>{
-        const div =document.createElement('div');
+    filteredArray.forEach(pokemon=>{
+        const div=document.createElement('div');
         div.classList.add('dd-btns');
-        div.textContent = pokemon.id;
-        div.addEventListener('click', () => {
-            searchInput.value = pokemon.id;
+        div.textContent= isName ? pokemon.name : pokemon.id;
+        div.addEventListener('click',()=>{
+            searchInput.value = isName ? pokemon.name : pokemon.id;
+            searchInput.focus();
         });
         dropDownCont.appendChild(div);
     })
@@ -293,11 +261,7 @@ const showSuggestionsForId=(query)=>{
 maxBtn.addEventListener('click',()=>{
     const currentWidth =parseInt(window.getComputedStyle(imgView).width);
     imgView.style.width=(currentWidth+20)+'px';
-    if(currentWidth>=180){
-        maxBtn.disabled=true;
-    }else{
-        maxBtn.disabled=false;
-    }
+    currentWidth>=180 ? maxBtn.disabled=true : maxBtn.disabled=false;
     if(currentWidth>50){
         minBtn.disabled=false;
     }
@@ -306,11 +270,7 @@ maxBtn.addEventListener('click',()=>{
 minBtn.addEventListener('click',()=>{
     const currentWidth =parseInt(window.getComputedStyle(imgView).width);
     imgView.style.width=(currentWidth-20)+'px';
-    if(currentWidth<=75){
-        minBtn.disabled=true;
-    }else{
-        minBtn.disabled=false;
-    }
+    currentWidth<=75 ? minBtn.disabled=true : minBtn.disabled=false;
     if(currentWidth<200){
         maxBtn.disabled=false;
     }
