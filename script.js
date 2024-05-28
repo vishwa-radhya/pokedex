@@ -261,7 +261,12 @@ const handleSuggestions=(filteredArray,isName)=>{
     filteredArray.forEach(pokemon=>{
         const div=document.createElement('div');
         div.classList.add('dd-btns');
-        div.textContent= isName ? pokemon.name : pokemon.id;
+        const regex=new RegExp(`^(${searchInput.value})`,'i');
+        if(isName){
+            div.innerHTML=pokemon.name.replace(regex,`<span class='high'>${searchInput.value}</span>`);
+        }else{
+            div.innerHTML=pokemon.id.replace(regex,`<span class='high'>${searchInput.value}</span>`);
+        }
         div.addEventListener('click',()=>{
             searchInput.value = isName ? pokemon.name : pokemon.id;
             searchInput.focus();

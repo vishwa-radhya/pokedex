@@ -519,3 +519,8 @@ input[type='search']::-webkit-search-cancel-button{
   border-color: transparent transparent black transparent;
   margin-left: -6px;
 }
+
+.high{
+    color: #040404;
+    font-weight: bold;
+}
