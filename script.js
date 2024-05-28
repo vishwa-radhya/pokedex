@@ -24,6 +24,7 @@ const minBtn=document.getElementById('manimize');
 const t_loader=document.getElementById('t-loader');
 const noAnimationMsg=document.getElementById('no-anim');
 const pokemonSoundElement=document.getElementById('music');
+const toolTip=document.getElementById('tooltip');
 let isLoading = false;
 let isGlowing=false;
 let globalInput;
@@ -43,12 +44,23 @@ const fetchData=async()=>{
         data=result.results;
         t_loader.hidden=true;
     container.hidden=false;
+    showToolTip();
     }catch(e){
         alert('error occured try after few moments');
         t_loader.hidden=true;
         return;
     }
 }
+
+const showToolTip=()=>{
+    setTimeout(()=>{
+        toolTip.style.visibility='hidden';
+        toolTip.style.opacity='0';
+    },2000);
+    toolTip.style.visibility='visible';
+    toolTip.style.opacity='1';
+}
+
 window.onload=()=>{
     fetchData();
 }

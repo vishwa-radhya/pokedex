@@ -482,3 +482,40 @@ input[type='search']::-webkit-search-cancel-button{
     font-weight: 500;
     margin-top: -18px;
 }
+
+.tooltip{
+    border: 1px solid black;
+    position: relative;
+    display:inline-block;
+    width: 5rem;
+    height: 1.4rem;
+    top: -38.7em;
+    right: calc(-9.9em - 0.2px);
+    z-index: 10;
+    text-shadow: none;
+    background-color: #555d56;
+    color: ghostwhite;
+    opacity: 1;
+    border-radius: 4px;
+    line-height: 14px;
+    visibility: visible;
+    text-align:center;
+    transition: opacity 1s ease ,visibility 1s ease;
+}
+
+
+.tooltiptext{
+    font-size: 11px;
+    font-weight: 500;
+}
+
+.tooltip::after{
+    content: '';
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent black transparent;
+  margin-left: -6px;
+}
