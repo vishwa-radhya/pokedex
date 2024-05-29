@@ -337,16 +337,26 @@ const updateEvolContUI=async()=>{
                 const result=await response.json();
                 const img=document.createElement('img');
                 const p=document.createElement('p');
+                const loader=document.createElement('div');
                 img.src=result.sprites.front_default;
                 img.alt=result.name;
                 img.className='scaler';
                 p.textContent=result.name;
                 p.style.fontFamily=' "Orbitron", sans-serif';
+                loader.className='img-loader';
                 const div=document.createElement('div');
                 div.className='evol-img-cont';
+                div.appendChild(loader);
                 div.appendChild(img);
                 div.appendChild(p);
                 evolChainCont.appendChild(div);
+                img.onload=()=>{
+                    loader.remove();
+                }
+                img.onerror=()=>{
+                    loader.remove();
+                    p.textContent='Image Not available';
+                }
             }catch(e){
                 console.log(e);
                 const h2=document.createElement('h2');

@@ -609,3 +609,18 @@ input[type='search']::-webkit-search-cancel-button{
 .scaler:hover{
     scale: 1.10;
 }
+
+.img-loader{
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #3498db;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    animation: img-loader-spin 1s linear infinite;
+    margin: auto;
+}
+
+@keyframes img-loader-spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
