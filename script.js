@@ -272,7 +272,7 @@ const handleSuggestions=(filteredArray,isName)=>{
         if(isName){
             div.innerHTML=pokemon.name.replace(regex,`<span class='high'>${searchInput.value}</span>`);
         }else{
-            div.innerHTML=pokemon.id.replace(regex,`<span class='high'>${searchInput.value}</span>`);
+            div.innerHTML=pokemon.id.toString().replace(regex,`<span class='high'>${searchInput.value}</span>`);
         }
         div.addEventListener('click',()=>{
             searchInput.value = isName ? pokemon.name : pokemon.id;
@@ -339,6 +339,7 @@ const updateEvolContUI=async()=>{
                 const p=document.createElement('p');
                 img.src=result.sprites.front_default;
                 img.alt=result.name;
+                img.className='scaler';
                 p.textContent=result.name;
                 p.style.fontFamily=' "Orbitron", sans-serif';
                 const div=document.createElement('div');

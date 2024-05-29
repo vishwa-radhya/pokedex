@@ -605,3 +605,7 @@ input[type='search']::-webkit-search-cancel-button{
 .no-form-data{
     font-family: "Orbitron", sans-serif;
 }
+
+.scaler:hover{
+    scale: 1.10;
+}
