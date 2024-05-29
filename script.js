@@ -32,6 +32,11 @@ let globalPokemonName;
 let input;
 let animatedGifLink;
 let normalImgLink;
+let globalPokemonId;
+const evolExitBtn=document.getElementById('exit-btn-cont').children[1];
+const evolCont =document.getElementById('evolution-cont');
+const evolChainCont=document.getElementById('evolution-chain-cont');
+let isNewImageLoaded=false;
 const fetchApi ='https://pokeapi-proxy.freecodecamp.rocks/api/pokemon/'
 const fetchApi2='https://pokeapi.co/api/v2/pokemon/';
 let data=[]
@@ -89,6 +94,7 @@ const updateStats=(stats)=>{
     avail_stats.forEach((stat,index)=>{
         stat.textContent=stat_array[index];
     })
+    isNewImageLoaded=true;
     spinnerOnandOff();
 }
 
@@ -142,6 +148,7 @@ const updateUI=async()=>{
         isLoading=false;
         const {height,id,name,sprites,stats,types,weight}=result;
         globalPokemonName=name;
+        globalPokemonId=id;
         updateNameAndId(name,id);
         heightAndWeight(height,weight);
         updateImageAndTypes(types,sprites,name);
@@ -294,3 +301,65 @@ minBtn.addEventListener('click',()=>{
 })
 
 imgView.addEventListener('click',playPokemonSound);
+
+evolExitBtn.addEventListener('click',()=>{
+    evolCont.classList.remove('evol-show');
+    evolCont.classList.add('evol-hide');
+})
+imgView.addEventListener('click',()=>{
+    if(isNewImageLoaded){
+        evolCont.classList.remove('evol-hide');
+        evolCont.classList.add('evol-show');
+        updateEvolContUI();
+    }
+})
+
+const findPokemonEvolArr=(id)=>{
+    for(let arr of Object.values(pokemonEvolMap)){
+        if(arr.includes(id)){
+            return arr;
+        }
+    }
+}
+
+const updateEvolContUI=async()=>{
+    evolChainCont.innerHTML='';
+    let evolutionArr=findPokemonEvolArr(globalPokemonId);
+    if(evolutionArr){
+        if(evolutionArr.length>=5){
+            evolCont.style.height='auto';
+        }else{
+            evolCont.style.height='min(300px,70vw)';
+        }
+        for(let i=0;i<evolutionArr.length;i++){
+            try{
+                const response=await fetch(fetchApi+evolutionArr[i].toString());
+                const result=await response.json();
+                const img=document.createElement('img');
+                const p=document.createElement('p');
+                img.src=result.sprites.front_default;
+                img.alt=result.name;
+                p.textContent=result.name;
+                p.style.fontFamily=' "Orbitron", sans-serif';
+                const div=document.createElement('div');
+                div.className='evol-img-cont';
+                div.appendChild(img);
+                div.appendChild(p);
+                evolChainCont.appendChild(div);
+            }catch(e){
+                console.log(e);
+                const h2=document.createElement('h2');
+                h2.textContent='No Evolution Data Available at this Moment.';
+                h2.className='no-form-data';
+                evolChainCont.appendChild(h2);
+                return;
+            }
+        }
+        }else{
+            console.log('no map included');
+            const h2=document.createElement('h2');
+            h2.textContent='No Evolution Data Available For This Pokemon';
+            h2.className='no-form-data';
+            evolChainCont.appendChild(h2);
+        }
+    }
