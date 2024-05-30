@@ -175,6 +175,7 @@ animationBtn.addEventListener('click',async ()=>{
             animatedGifLink=link;
     }catch(e){
         alert('error with animation try after some time');
+        return;
     }
     if(!animatedGifLink){
         isLoading=false;
