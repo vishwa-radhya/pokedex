@@ -25,6 +25,9 @@ const t_loader=document.getElementById('t-loader');
 const noAnimationMsg=document.getElementById('no-anim');
 const pokemonSoundElement=document.getElementById('music');
 const toolTip=document.getElementById('tooltip');
+const dialogElement=document.getElementById('dialog-ele');
+const acceptDialogBtn=document.getElementById('dialog-ele').children[1].children[0];
+const rejectDialogBtn=document.getElementById('dialog-ele').children[1].children[1];
 let isLoading = false;
 let isGlowing=false;
 let globalInput;
@@ -39,8 +42,8 @@ const evolChainCont=document.getElementById('evolution-chain-cont');
 let isNewImageLoaded=false;
 const fetchApi ='https://pokeapi-proxy.freecodecamp.rocks/api/pokemon/'
 const fetchApi2='https://pokeapi.co/api/v2/pokemon/';
-let data=[]
-
+let data=[];
+const cacheEvolData={};
 const fetchData=async()=>{
     try{
         t_loader.hidden=false;
@@ -51,8 +54,8 @@ const fetchData=async()=>{
     container.hidden=false;
     showToolTip();
     }catch(e){
-        alert('error occured try after few moments');
         t_loader.hidden=true;
+        alert('error occured try after few moments');
         return;
     }
 }
@@ -306,13 +309,23 @@ evolExitBtn.addEventListener('click',()=>{
     evolCont.classList.remove('evol-show');
     evolCont.classList.add('evol-hide');
 })
+
 imgView.addEventListener('click',()=>{
     if(isNewImageLoaded){
+        dialogElement.show();
+    }
+})
+
+acceptDialogBtn.addEventListener('click',()=>{
+        dialogElement.close();
         evolCont.classList.remove('evol-hide');
         evolCont.classList.add('evol-show');
         updateEvolContUI();
-    }
 })
+
+rejectDialogBtn.addEventListener('click',()=>[
+    dialogElement.close()
+])
 
 const findPokemonEvolArr=(id)=>{
     for(let arr of Object.values(pokemonEvolMap)){
@@ -322,20 +335,28 @@ const findPokemonEvolArr=(id)=>{
     }
 }
 
-const updateEvolContUI=async()=>{
-    evolChainCont.innerHTML='';
-    let evolutionArr=findPokemonEvolArr(globalPokemonId);
-    if(evolutionArr){
-        if(evolutionArr.length>=5){
-            evolCont.style.height='auto';
-        }else{
-            evolCont.style.height='min(300px,70vw)';
-        }
-        for(let i=0;i<evolutionArr.length;i++){
-            try{
-                const response=await fetch(fetchApi+evolutionArr[i].toString());
-                const result=await response.json();
-                const img=document.createElement('img');
+const evolImgFetcher=async(evolutionArrElement)=>{
+    const cacheKey=evolutionArrElement;
+    if(cacheEvolData[cacheKey]){
+        return cacheEvolData[cacheKey];
+    }
+    try{
+        const response=await fetch(fetchApi+evolutionArrElement.toString());
+        const result=await response.json();
+        cacheEvolData[cacheKey]=result;
+        return result;
+    }catch(e){
+        console.log(e);
+        const h2=document.createElement('h2');
+        h2.textContent='No Evolution Data Available at this Moment.';
+        h2.className='no-form-data';
+        evolChainCont.appendChild(h2);
+        return;
+    }
+}
+
+const evolContUiUpdateHandler=(result)=>{
+    const img=document.createElement('img');
                 const p=document.createElement('p');
                 const loader=document.createElement('div');
                 img.src=result.sprites.front_default;
@@ -357,14 +378,16 @@ const updateEvolContUI=async()=>{
                     loader.remove();
                     p.textContent='Image Not available';
                 }
-            }catch(e){
-                console.log(e);
-                const h2=document.createElement('h2');
-                h2.textContent='No Evolution Data Available at this Moment.';
-                h2.className='no-form-data';
-                evolChainCont.appendChild(h2);
-                return;
-            }
+}
+
+const updateEvolContUI=async()=>{
+    evolChainCont.innerHTML='';
+    let evolutionArr=findPokemonEvolArr(globalPokemonId);
+    if(evolutionArr){
+        for(let i=0;i<evolutionArr.length;i++){
+                let result;
+                result= await evolImgFetcher(evolutionArr[i]);
+                evolContUiUpdateHandler(result);
         }
         }else{
             console.log('no map included');
@@ -374,3 +397,4 @@ const updateEvolContUI=async()=>{
             evolChainCont.appendChild(h2);
         }
     }
+
