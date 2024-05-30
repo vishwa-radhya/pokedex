@@ -612,7 +612,7 @@ input[type='search']::-webkit-search-cancel-button{
 
 .img-loader{
     border: 4px solid #f3f3f3;
-    border-top: 4px solid #3498db;
+    border-top: 4px solid #141515;
     border-radius: 50%;
     width: 20px;
     height: 20px;
