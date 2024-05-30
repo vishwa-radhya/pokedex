@@ -309,6 +309,7 @@ imgView.addEventListener('click',playPokemonSound);
 evolExitBtn.addEventListener('click',()=>{
     evolCont.classList.remove('evol-show');
     evolCont.classList.add('evol-hide');
+    container.style.opacity='1'
 })
 
 imgView.addEventListener('click',()=>{
@@ -322,6 +323,7 @@ acceptDialogBtn.addEventListener('click',()=>{
         evolCont.classList.remove('evol-hide');
         evolCont.classList.add('evol-show');
         updateEvolContUI();
+        container.style.opacity='0.8';
 })
 
 rejectDialogBtn.addEventListener('click',()=>[
