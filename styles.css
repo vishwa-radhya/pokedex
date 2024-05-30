@@ -422,6 +422,11 @@ button{
         margin-top: 5px;
     }
  }
+ @media screen and (max-width:350px) {
+    #dialog-ele button{
+        flex: 1;
+    }
+ }
 
 input[type='search']::-webkit-search-cancel-button{
     -webkit-appearance: none;
@@ -543,7 +548,7 @@ input[type='search']::-webkit-search-cancel-button{
 
 #evolution-cont{
     width: min(500px,90vw);
-    height: min(300px,70vw);
+    height: auto;
     position: relative;
     top: -600px;
     border-radius: 10px;
@@ -553,6 +558,7 @@ input[type='search']::-webkit-search-cancel-button{
     flex-direction: column;
     background-color: #b1c4ec;
     box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+    z-index: 5;
 }
 
 #exit-btn-cont{
@@ -585,21 +591,21 @@ input[type='search']::-webkit-search-cancel-button{
     border-top: 2px solid black;
     flex: 1;
     display: flex;
-    align-items: center;
+    align-items: stretch;
     justify-content: space-between;
     flex-wrap: wrap;
 }
 
 .evol-img-cont{
-    flex: 1;
-    height: 50%;
     margin-left: 3px;
     margin-bottom: 3px;
+    margin-top: 3px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     box-shadow: 0 2px 2px rgb(57, 56, 56);
+    flex: 1;
 }
 
 .no-form-data{
@@ -623,4 +629,39 @@ input[type='search']::-webkit-search-cancel-button{
 @keyframes img-loader-spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
+}
+
+#dialog-ele{
+    border: 2px solid gray;
+    position: relative;
+    background-color: whitesmoke;
+    top: -500px;
+    width: min(200px,40vw);
+    border-radius: 5px;
+    z-index: 9;
+    box-shadow: -4px 0px 0px black,0px 1px 5px black;
+}
+#dialog-ele > *:first-child{
+    text-align:center;
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin-top: -7px;
+    margin-bottom: 7px;
+}
+#dialog-ele > *:nth-child(2){
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+#dialog-ele button{
+    font-family: "Orbitron", sans-serif;
+    border-radius: 5px;
+    /* flex: 1; */
+}
+
+#dialog-ele button:active{
+    scale: 1.05;
+    background-color: rgb(247, 247, 247);
+    color: black;
 }
