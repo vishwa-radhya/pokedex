@@ -60,7 +60,8 @@ const fetchData=async()=>{
     }catch(e){
         t_loader.hidden=true;
         container.hidden=true;
-        errFetchDataImg.hidden=false;
+        // errFetchDataImg.hidden=false;
+        errFetchDataImg.classList.replace('evol-hide','evol-show');
         return;
     }
 }
