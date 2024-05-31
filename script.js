@@ -39,23 +39,28 @@ let globalPokemonId;
 const evolExitBtn=document.getElementById('exit-btn-cont').children[1];
 const evolCont =document.getElementById('evolution-cont');
 const evolChainCont=document.getElementById('evolution-chain-cont');
+const errFetchDataImg=document.getElementById('err');
 let isNewImageLoaded=false;
-const fetchApi ='https://pokeapi-proxy.freecodecamp.rocks/api/pokemon/'
+const fetchApi ='https://pokeapi-proxy.freecodecamp.rocks/api/pokemon/';
 const fetchApi2='https://pokeapi.co/api/v2/pokemon/';
+const fetchApi3='https://pokeapi.co/api/v2/pokemon/?offset=0&limit=1302';
 let data=[];
+let idData=[];
 const cacheEvolData={};
 const fetchData=async()=>{
     try{
         t_loader.hidden=false;
-        const response =await fetch(fetchApi);
+        const response =await fetch(fetchApi3);
         const result =await response.json();
         data=result.results;
+        idData=data.map(pokemon=>pokemon.url.slice(34).replace('/',''));
         t_loader.hidden=true;
-    container.hidden=false;
+        container.hidden=false;
     showToolTip();
     }catch(e){
         t_loader.hidden=true;
-        alert('error occured try after few moments');
+        container.hidden=true;
+        errFetchDataImg.hidden=false;
         return;
     }
 }
@@ -260,7 +265,7 @@ const showSuggestions=(query)=>{
     handleSuggestions(filterData,true);
 }
 const showSuggestionsForId=(query)=>{
-    const filteredId=data.filter(pokemon=>pokemon.id.toString().startsWith(query.toString()));
+    const filteredId=idData.filter(pokemonId=>pokemonId.startsWith(query.toString()));
     handleSuggestions(filteredId,false);
 }
 
@@ -276,7 +281,7 @@ const handleSuggestions=(filteredArray,isName)=>{
         if(isName){
             div.innerHTML=pokemon.name.replace(regex,`<span class='high'>${searchInput.value}</span>`);
         }else{
-            div.innerHTML=pokemon.id.toString().replace(regex,`<span class='high'>${searchInput.value}</span>`);
+            div.innerHTML=pokemon.replace(regex,`<span class='high'>${searchInput.value}</span>`);
         }
         div.addEventListener('click',()=>{
             searchInput.value = isName ? pokemon.name : pokemon.id;
@@ -319,11 +324,11 @@ imgView.addEventListener('click',()=>{
 })
 
 acceptDialogBtn.addEventListener('click',()=>{
-        dialogElement.close();
-        evolCont.classList.remove('evol-hide');
-        evolCont.classList.add('evol-show');
-        updateEvolContUI();
-        container.style.opacity='0.8';
+    dialogElement.close();
+    evolCont.classList.remove('evol-hide');
+    evolCont.classList.add('evol-show');
+    updateEvolContUI();
+    container.style.opacity='0.8';
 })
 
 rejectDialogBtn.addEventListener('click',()=>[
@@ -341,6 +346,7 @@ const findPokemonEvolArr=(id)=>{
 const evolImgFetcher=async(evolutionArrElement)=>{
     const cacheKey=evolutionArrElement;
     if(cacheEvolData[cacheKey]){
+        // console.log(roughSizeOfCacheObject(cacheEvolData)/1000+'kb');
         return cacheEvolData[cacheKey];
     }
     try{
@@ -360,27 +366,27 @@ const evolImgFetcher=async(evolutionArrElement)=>{
 
 const evolContUiUpdateHandler=(result)=>{
     const img=document.createElement('img');
-                const p=document.createElement('p');
-                const loader=document.createElement('div');
-                img.src=result.sprites.front_default;
-                img.alt=result.name;
-                img.className='scaler';
-                p.textContent=result.name;
-                p.style.fontFamily=' "Orbitron", sans-serif';
-                loader.className='img-loader';
-                const div=document.createElement('div');
-                div.className='evol-img-cont';
-                div.appendChild(loader);
-                div.appendChild(img);
-                div.appendChild(p);
-                evolChainCont.appendChild(div);
-                img.onload=()=>{
-                    loader.remove();
-                }
-                img.onerror=()=>{
-                    loader.remove();
-                    p.textContent='Image Not available';
-                }
+    const p=document.createElement('p');
+    const loader=document.createElement('div');
+    img.src=result.sprites.front_default;
+    img.alt=result.name;
+    img.className='scaler';
+    p.textContent=result.name;
+    p.style.fontFamily=' "Orbitron", sans-serif';
+    loader.className='img-loader';
+    const div=document.createElement('div');
+    div.className='evol-img-cont';
+    div.appendChild(loader);
+    div.appendChild(img);
+    div.appendChild(p);
+    evolChainCont.appendChild(div);
+    img.onload=()=>{
+        loader.remove();
+    }
+    img.onerror=()=>{
+        loader.remove();
+        p.textContent='Image Not available';
+    }
 }
 
 const updateEvolContUI=async()=>{
@@ -388,12 +394,11 @@ const updateEvolContUI=async()=>{
     let evolutionArr=findPokemonEvolArr(globalPokemonId);
     if(evolutionArr){
         for(let i=0;i<evolutionArr.length;i++){
-                let result;
-                result= await evolImgFetcher(evolutionArr[i]);
-                evolContUiUpdateHandler(result);
+            let result;
+            result= await evolImgFetcher(evolutionArr[i]);
+            evolContUiUpdateHandler(result);
         }
         }else{
-            console.log('no map included');
             const h2=document.createElement('h2');
             h2.textContent='No Evolution Data Available For This Pokemon';
             h2.className='no-form-data';
@@ -401,3 +406,26 @@ const updateEvolContUI=async()=>{
         }
     }
 
+// function roughSizeOfCacheObject(object) {
+//     const objectList = [];
+//     const stack = [object];
+//     let bytes = 0;
+//     while (stack.length) {
+//         const value = stack.pop();    
+//         if (typeof value === 'boolean') {
+//             bytes += 4;
+//         } else if (typeof value === 'string') {
+//             bytes += value.length * 2;
+//         } else if (typeof value === 'number') {
+//             bytes += 8;
+//         } else if (typeof value === 'object' && value !== null && !objectList.includes(value)) {
+//             objectList.push(value);
+//             for (const i in value) {
+//                 if (value.hasOwnProperty(i)) {
+//                     stack.push(value[i]);
+//                 }
+//             }
+//         }
+//     }
+//     return bytes;
+// }
