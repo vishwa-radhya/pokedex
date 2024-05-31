@@ -39,7 +39,6 @@ let globalPokemonId;
 const evolExitBtn=document.getElementById('exit-btn-cont').children[1];
 const evolCont =document.getElementById('evolution-cont');
 const evolChainCont=document.getElementById('evolution-chain-cont');
-const errFetchDataImg=document.getElementById('err');
 let isNewImageLoaded=false;
 const fetchApi ='https://pokeapi-proxy.freecodecamp.rocks/api/pokemon/';
 const fetchApi2='https://pokeapi.co/api/v2/pokemon/';
@@ -60,8 +59,6 @@ const fetchData=async()=>{
     }catch(e){
         t_loader.hidden=true;
         container.hidden=true;
-        // errFetchDataImg.hidden=false;
-        errFetchDataImg.classList.replace('evol-hide','evol-show');
         return;
     }
 }
