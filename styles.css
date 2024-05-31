@@ -657,11 +657,26 @@ input[type='search']::-webkit-search-cancel-button{
 #dialog-ele button{
     font-family: "Orbitron", sans-serif;
     border-radius: 5px;
-    /* flex: 1; */
 }
 
 #dialog-ele button:active{
     scale: 1.05;
     background-color: rgb(247, 247, 247);
     color: black;
+}
+#err{
+    display: flex;
+    flex-direction: column;
+    max-width: 280px;
+    position:absolute;
+    z-index: -1;
+    top: 160px;
+}
+#err-img{
+    margin-left: 40px;
+}
+#err p{
+    margin-top: 20px;
+    text-align: center;
+    font-weight: 500;
 }
