@@ -10,8 +10,10 @@ This is a simple pokemon search app that allows users to search for pokemon by n
 
 `https://pokeapi.co/api/v2/pokemon/`
 
+
 > click the link to view the project [pokemon search app](https://vishwa-radhya.github.io/pokedex/)
 
+---
 ### Features
 1. Shows a dropdown containing available pokemon or id's when the user starts the search in the input with letter highlight.
    
@@ -23,6 +25,7 @@ This is a simple pokemon search app that allows users to search for pokemon by n
 
 5. Also after a successful pokemon search tap on the pokemon which shows a dialog which asks the user whether he wishes to see the evolution forms of the pokemon.
 
+---
 ### Contributing
 
 We welcome contributions to this project! Please follow these guidelines:
@@ -30,6 +33,7 @@ We welcome contributions to this project! Please follow these guidelines:
 - Fork the repository.
 - Create a new branch for your changes.
 - Submit a pull request with clear and concise descriptions.
+---
 
 ### Contact
 
