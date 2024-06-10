@@ -275,7 +275,44 @@ button{
 .gt{
     grid-column-start: 1;
     grid-column-end: 3;
-    
+}
+
+
+.hp-st::before{
+    position: absolute;
+    content: url(assets/health-svg.svg);
+    margin-left: -20px;
+    margin-top: 3.5px;
+}
+.atk-st::before{
+    margin-left: -20px;
+    position: absolute;
+    margin-top: 3px;
+    content: url(assets/sword-svg.svg);
+}
+.dfn-st::before{
+    margin-left: -20px;
+    margin-top: 3.5px;
+    position: absolute;
+    content: url(assets/shield-svg.svg);
+}
+.sp-atk-st::before{
+    margin-left: -24px;
+    margin-top: 3px;
+    position: absolute;
+    content: url(assets/sp-sword-svg.svg);
+}
+.sp-dfn-st::before{
+    margin-left: -22px;
+    margin-top: 3.5px;
+    position: absolute;
+    content: url(assets/sp-shield-svg.svg);
+}
+.spd-st::before{
+    margin-left: -23px;
+    margin-top: 4px;
+    position: absolute;
+    content: url(assets/speed-svgrepo-com.svg);
 }
 
 .stat{

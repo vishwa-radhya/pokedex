@@ -69,9 +69,15 @@ const showToolTip=()=>{
     setTimeout(()=>{
         toolTip.style.visibility='hidden';
         toolTip.style.opacity='0';
-    },2000);
-    toolTip.style.visibility='visible';
-    toolTip.style.opacity='1';
+        setTimeout(()=>{
+            toolTip.style.visibility='visible';
+            toolTip.style.opacity='1';
+            setTimeout(()=>{
+                toolTip.style.visibility='hidden';
+                toolTip.style.opacity='0';
+            },1800)
+        },1800)
+    },1800)
 }
 
 window.onload=()=>{
@@ -284,7 +290,7 @@ const handleSuggestions=(filteredArray,isName)=>{
             div.innerHTML=pokemon.replace(regex,`<span class='high'>${searchInput.value}</span>`);
         }
         div.addEventListener('click',()=>{
-            searchInput.value = isName ? pokemon.name : pokemon.id;
+            searchInput.value = isName ? pokemon.name : pokemon;
             searchInput.focus();
         });
         dropDownCont.appendChild(div);
@@ -387,6 +393,8 @@ const evolContUiUpdateHandler=(result)=>{
         loader.remove();
         p.textContent='Image Not available';
     }
+    img.classList.add('animate__animated');
+    img.classList.add('animate__flip');
 }
 
 const updateEvolContUI=async()=>{
