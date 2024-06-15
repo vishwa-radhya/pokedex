@@ -23,7 +23,6 @@ const maxBtn=document.getElementById('maximize');
 const minBtn=document.getElementById('manimize');
 const t_loader=document.getElementById('t-loader');
 const noAnimationMsg=document.getElementById('no-anim');
-const pokemonSoundElement=document.getElementById('music');
 const toolTip=document.getElementById('tooltip');
 const dialogElement=document.getElementById('dialog-ele');
 const acceptDialogBtn=document.getElementById('dialog-ele').children[1].children[0];
@@ -204,15 +203,6 @@ animationBtn.addEventListener('click',async ()=>{
     normalBtn.hidden=false;
 })
 
-const playPokemonSound=()=>{
-    if(globalPokemonName=='pikachu'){
-        pokemonSoundElement.src='./sounds-beta/pikachu-c.mp3';
-        pokemonSoundElement.autoplay=true;
-    }else{
-        return;
-    }
-}
-
 const normalize=()=>{
     imgView.style.width='170px';
 }
@@ -314,8 +304,6 @@ minBtn.addEventListener('click',()=>{
         maxBtn.disabled=false;
     }
 })
-
-imgView.addEventListener('click',playPokemonSound);
 
 evolExitBtn.addEventListener('click',()=>{
     evolCont.classList.remove('evol-show');
