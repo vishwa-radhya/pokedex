@@ -643,6 +643,7 @@ input[type='search']::-webkit-search-cancel-button{
     justify-content: center;
     box-shadow: 0 2px 2px rgb(57, 56, 56);
     flex: 1;
+    border-radius:5px;
 }
 
 .no-form-data{
