@@ -100,6 +100,7 @@ label{
     top: 62.5px;
     background-color: rgb(229, 237, 239);
     overflow: auto;
+    z-index: 5;
 }
 
 .dd-btns {
@@ -114,6 +115,7 @@ label{
     letter-spacing: 0.5px;
     text-align: center;
     overflow: hidden;
+    z-index: 6;
 }
 
 .dd-btns:active{
@@ -124,7 +126,7 @@ label{
 
  ::-webkit-scrollbar{
     width: 6px;
-    z-index: 3;
+    z-index: 7;
     background-color: rgb(145, 142, 142);
  }
 
@@ -228,6 +230,7 @@ button{
 }
 
 #img-cont{
+    position: relative;
     width: auto;
     display: flex;
     height: 150px;
@@ -261,6 +264,27 @@ button{
     margin: 5px 0px 7px 20px;
     display: flex;
     justify-content: space-around;
+}
+
+.disabled{
+    cursor: not-allowed;
+    background-color: gray;
+}
+
+.audio-svg-cont{
+    position: absolute;
+    bottom: -20%;
+    left: 60.5%;
+    border-radius: 2px;
+    height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 20;
+}
+.audio-svg-cont:active{
+    background-color: #5e5e5b;
+    scale: 0.8;
 }
 
 #stats-cont{
@@ -437,7 +461,7 @@ button{
     #drop-down-cont {
         background-color: rgb(229, 237, 239);
         overflow: auto;
-        z-index: 1;
+        z-index: 5;
         width: 60%; 
         left: 10%; 
         top: auto; 
@@ -595,7 +619,7 @@ input[type='search']::-webkit-search-cancel-button{
     flex-direction: column;
     background-color: #b1c4ec;
     box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
-    z-index: 5;
+    z-index: 8;
 }
 
 #exit-btn-cont{
