@@ -23,6 +23,7 @@ const maxBtn=document.getElementById('maximize');
 const minBtn=document.getElementById('manimize');
 const t_loader=document.getElementById('t-loader');
 const noAnimationMsg=document.getElementById('no-anim');
+const audioSvgCont=document.getElementById('audio-svg-cont');
 const toolTip=document.getElementById('tooltip');
 const dialogElement=document.getElementById('dialog-ele');
 const acceptDialogBtn=document.getElementById('dialog-ele').children[1].children[0];
@@ -43,9 +44,11 @@ let isNewImageLoaded=false;
 const fetchApi ='https://pokeapi-proxy.freecodecamp.rocks/api/pokemon/';
 const fetchApi2='https://pokeapi.co/api/v2/pokemon/';
 const fetchApi3='https://pokeapi.co/api/v2/pokemon/?offset=0&limit=1302';
+const fetchCrySoundApi= "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/"
 let data=[];
 let idData=[];
 const cacheEvolData={};
+
 const fetchData=async()=>{
     try{
         t_loader.hidden=false;
@@ -136,6 +139,7 @@ const filterInput=(input)=>input.replace(/[^a-zA-Z0-9-]/ig,'').toLowerCase();
 const updateUI=async()=>{
     animationBtn.hidden=true;
     noAnimationMsg.hidden=true;
+    audioSvgCont.classList.replace('evol-show','evol-hide');
     normalize();
     if(searchInput.value===''){
         return;
@@ -168,6 +172,7 @@ const updateUI=async()=>{
         updateStats(stats);
         normalBtn.hidden=true;
         animationBtn.hidden=false;
+        audioSvgCont.classList.replace('evol-hide','evol-show');
     }catch(e){
         spinner.style.animation='stop-spin 1s ease-in-out infinite';
         spinner.style.display='none';
@@ -401,6 +406,45 @@ const updateEvolContUI=async()=>{
             evolChainCont.appendChild(h2);
         }
     }
+
+const playPokemonCry=async()=>{
+    const id = globalPokemonId;
+    audioSvgCont.classList.add('disabled');
+    try{
+        const response = await fetch(fetchCrySoundApi+`${id}.ogg`);
+        if(!response.ok){
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        if(!response.headers.get('Content-Type').startsWith('audio/')){
+            console.error('Not a Supported audio format');
+            return;
+        }
+        const blob = await response.blob();
+        const audioCtx = new AudioContext();
+        const reader = new FileReader();
+        reader.readAsArrayBuffer(blob);
+
+        reader.onload = () =>{
+            const audioBuffer = reader.result;
+            audioCtx.decodeAudioData(audioBuffer)
+            .then(decodedBuffer=>{
+                const source = audioCtx.createBufferSource();
+                source.buffer = decodedBuffer;
+                source.connect(audioCtx.destination);
+                source.start(0);
+            })
+            .catch(err=>console.error('error decoding audio data:',err));
+        }
+        reader.onerror=(err)=>console.error('Error reading audio data: ',err);
+        audioSvgCont.classList.remove('disabled');
+    }catch(e){
+        console.error('Error fetching audio:',error);
+        alert('an error occured try again after some time');
+        audioSvgCont.classList.remove('disabled');
+    }
+}
+
+audioSvgCont.addEventListener('click',playPokemonCry)
 
 // function roughSizeOfCacheObject(object) {
 //     const objectList = [];
