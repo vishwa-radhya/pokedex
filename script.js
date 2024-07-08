@@ -190,6 +190,7 @@ animationBtn.addEventListener('click',async ()=>{
             animatedGifLink=link;
     }catch(e){
         isLoading=false;
+        console.log('hit');
         spinnerOnandOff();
         alert('error with animation try after some time');
         return;
