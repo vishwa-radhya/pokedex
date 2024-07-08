@@ -189,6 +189,8 @@ animationBtn.addEventListener('click',async ()=>{
         const link=result2.sprites.versions['generation-v']['black-white'].animated.front_default;
             animatedGifLink=link;
     }catch(e){
+        isLoading=false;
+        spinnerOnandOff();
         alert('error with animation try after some time');
         return;
     }
